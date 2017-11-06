@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.projeto.clubedowhisky">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.projeto.clubedowhisky.AppActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.projeto.clubedowhisky.LoginActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.projeto.clubedowhisky.SignupActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_sign_up"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.projeto.clubedowhisky.RecoveryActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_recovery"
+            android:screenOrientation="portrait" />
+
+        <activity android:label="@string/app_name" android:name="com.projeto.clubedowhisky.MainActivity"></activity>
+
+        <activity
+            android:name="com.projeto.clubedowhisky.TicketActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_ticket"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

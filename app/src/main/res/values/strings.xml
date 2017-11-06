@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Whiskey Club</string>
+
+    <string name="action_login">Log in</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_signup">Sign up</string>
+    <string name="action_forgot_password">Forgot password?</string>
+    <string name="action_continue">Continue</string>
+
+    <string name="placeholder_login">Username</string>
+    <string name="placeholder_fullname">Fullname</string>
+    <string name="placeholder_password">Password</string>
+    <string name="placeholder_email">Email</string>
+
+    <string name="title_activity_login">Log In</string>
+    <string name="title_activity_main">General</string>
+    <string name="title_activity_sign_up">Sign Up</string>
+
+    <string name="error_data_loading">When loading data error has occurred. Check your network connection.</string>
+    <string name="error_email">E-mail invalido.</string>
+    <string name="error_email_taken">User with this mail is already</string>
+    <string name="error_field_empty">Required fields are empty</string>
+    <string name="error_internet_connection">No internet connection</string>
+    <string name="error_login_taken">Username is already taken</string>
+    <string name="error_password">Invalid password.</string>
+    <string name="error_signin">Incorrect username or password</string>
+    <string name="error_small_password">Minimum 6 characters</string>
+    <string name="error_small_username">Minimum 5 characters</string>
+    <string name="error_wrong_format">Wrong format</string>
+
+    <string name="label_add_drink">Add</string>
+    <string name="action_confirmar">Confirmar</string>
+
+    <string name="label_amount">Amount</string>
+    <string name="label_moeda">R$</string>
+</resources>

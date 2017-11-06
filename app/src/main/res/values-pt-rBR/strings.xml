@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Clube do Whisky</string>
+    <string name="action_login">Entrar</string>
+    <string name="action_logout">Sair</string>
+    <string name="action_signup">Registrar</string>
+    <string name="action_forgot_password">Esqueceu sua senha?</string>
+    <string name="action_continue">Continue</string>
+
+    <string name="placeholder_login">Login</string>
+    <string name="placeholder_fullname">Nome completo</string>
+    <string name="placeholder_password">Senha</string>
+    <string name="placeholder_email">E-mail</string>
+
+    <string name="title_activity_login">Entrar</string>
+    <string name="title_activity_main">General</string>
+    <string name="title_activity_sign_up">Cadastro</string>
+    <string name="title_activity_recovery">Recuperar senha</string>
+    <string name="title_activity_ticket">Ticket</string>
+
+    <string name="error_data_loading">Verifique a sua conexão de rede.</string>
+    <string name="error_email">Email invalido.</string>
+    <string name="error_email_taken">Já existe um usuário cadastrado com o email informado.</string>
+    <string name="error_field_empty">Os campos obrigatórios estão vazios</string>
+    <string name="error_internet_connection">Sem conexão à internet</string>
+    <string name="error_login_taken">O nome de usuário já existe</string>
+    <string name="error_password">Senha Invalida.</string>
+    <string name="error_signin">Usuário ou senha incorretos</string>
+    <string name="error_small_password">Mínimo de 6 caracteres</string>
+    <string name="error_small_username">Mínimo de 5 caracteres</string>
+    <string name="error_wrong_format">Formato incorreto</string>
+
+    <string name="label_add_drink">Adicionar</string>
+    <string name="label_amount">Valor total</string>
+</resources>
