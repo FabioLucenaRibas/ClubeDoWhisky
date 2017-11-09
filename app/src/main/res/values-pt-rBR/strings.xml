@@ -30,5 +30,12 @@
     <string name="error_wrong_format">Formato incorreto</string>
 
     <string name="label_add_drink">Adicionar</string>
+    <string name="action_confirm">Confirmar</string>
+
     <string name="label_amount">Valor total</string>
+    <string name="label_moeda">R$</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Configurações</string>
 </resources>

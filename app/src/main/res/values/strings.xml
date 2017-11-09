@@ -29,8 +29,13 @@
     <string name="error_wrong_format">Wrong format</string>
 
     <string name="label_add_drink">Add</string>
-    <string name="action_confirmar">Confirmar</string>
+    <string name="action_confirm">Confirm</string>
 
     <string name="label_amount">Amount</string>
     <string name="label_moeda">R$</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+
 </resources>
