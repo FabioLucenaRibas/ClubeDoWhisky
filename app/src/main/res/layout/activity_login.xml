@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.teste.clubedowhisky.AppActivity">
+    tools:context="com.projeto.clubedowhisky.AppActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -28,7 +28,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -60,7 +60,7 @@
                     android:id="@+id/signinPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+                    android:layout_gravity="center_horizontal|fill_horizontal|center|fill|start|end"
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="@string/placeholder_password"
@@ -72,7 +72,7 @@
                 android:id="@+id/signinBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+                android:layout_gravity="center_horizontal|fill_horizontal|center|fill|start|end"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_blue"
                 android:text="@string/action_login"
@@ -84,8 +84,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+                android:gravity="top|bottom|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
                 android:text="@string/action_forgot_password"
+                android:textAlignment="center"
+                android:textAllCaps="false"
                 android:textColor="@color/light_blue"
                 android:textSize="16dp" />
         </LinearLayout>

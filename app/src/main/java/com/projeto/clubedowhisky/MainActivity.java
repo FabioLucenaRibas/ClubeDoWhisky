@@ -72,6 +72,18 @@ public class MainActivity extends AppCompatActivity
         item2.setName("Whisky Jack Daniels Honey");
         drinks.add(item2);
 
+        Drinks item3 = new Drinks();
+        item3.setId(3);
+        item3.setQuantities(06);
+        item3.setName("Whisky Jack Daniels Honey");
+        drinks.add(item3);
+
+        Drinks item4 = new Drinks();
+        item4.setId(4);
+        item4.setQuantities(06);
+        item4.setName("Whisky Jack Daniels Honey");
+        drinks.add(item4);
+
         gridView = (GridView) findViewById(R.id.gridView1);
         adapter = new GridAdapter(this, drinks);
         gridView.setAdapter(adapter);
