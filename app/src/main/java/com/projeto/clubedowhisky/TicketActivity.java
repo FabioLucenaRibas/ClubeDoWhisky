@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.projeto.clubedowhisky.classes.Drinks;
@@ -16,8 +15,8 @@ public class TicketActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     ListView listView;
-    List<Drinks> drinks = new ArrayList<Drinks>();
-    ListBebidasAdapter adapter;
+    List<Drinks> drinks = new ArrayList<>();
+    ListDrinksAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class TicketActivity extends AppCompatActivity {
         obterBebidas();
 
         listView = (ListView) findViewById(R.id.listBebidasTicket);
-        adapter = new ListBebidasAdapter(this, drinks);
+        adapter = new ListDrinksAdapter(this, drinks);
         listView.setAdapter(adapter);
         listView.setDivider(null);
 

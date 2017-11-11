@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">Clube do Whisky</string>
+
+    <string name="action_settings">Configurações</string>
     <string name="action_login">Entrar</string>
     <string name="action_logout">Sair</string>
     <string name="action_signup">Registrar</string>
     <string name="action_forgot_password">Esqueceu sua senha?</string>
     <string name="action_continue">Continue</string>
+    <string name="action_confirm">Confirmar</string>
 
     <string name="placeholder_login">Login</string>
     <string name="placeholder_fullname">Nome completo</string>
@@ -30,12 +33,13 @@
     <string name="error_wrong_format">Formato incorreto</string>
 
     <string name="label_add_drink">Adicionar</string>
-    <string name="action_confirm">Confirmar</string>
-
+    <string name="label_starting_at">A partir de</string>
     <string name="label_amount">Valor total</string>
     <string name="label_moeda">R$</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Configurações</string>
+
+    <string name="drink_photo">Foto da bebida</string>
+
 </resources>
