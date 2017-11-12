@@ -34,7 +34,6 @@
 
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_signinUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
@@ -51,7 +50,6 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_signinPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
@@ -74,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|fill_horizontal|center|fill|start|end"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/button_blue"
+                android:background="@drawable/button_brown"
                 android:text="@string/action_login"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -89,7 +87,7 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/light_blue"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

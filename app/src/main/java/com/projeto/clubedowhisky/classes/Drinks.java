@@ -1,6 +1,5 @@
 package com.projeto.clubedowhisky.classes;
 
-import java.math.BigDecimal;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -10,7 +9,7 @@ public class Drinks implements Parcelable {
     private String name = "";
     private Integer quantities = 0;
     private String descricao = "";
-    private BigDecimal preco = BigDecimal.ZERO;
+    private Double preco = 0.0;
 
     public Integer getId() {
         return id;
@@ -44,14 +43,13 @@ public class Drinks implements Parcelable {
         this.descricao = descricao;
     }
 
-    public BigDecimal getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
-
 
     @Override
     public int describeContents() {
@@ -64,18 +62,18 @@ public class Drinks implements Parcelable {
         dest.writeString(this.name);
         dest.writeValue(this.quantities);
         dest.writeString(this.descricao);
-        dest.writeSerializable(this.preco);
+        dest.writeValue(this.preco);
     }
 
     public Drinks() {
     }
 
-    private Drinks(Parcel in) {
+    protected Drinks(Parcel in) {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.name = in.readString();
         this.quantities = (Integer) in.readValue(Integer.class.getClassLoader());
         this.descricao = in.readString();
-        this.preco = (BigDecimal) in.readSerializable();
+        this.preco = (Double) in.readValue(Double.class.getClassLoader());
     }
 
     public static final Creator<Drinks> CREATOR = new Creator<Drinks>() {

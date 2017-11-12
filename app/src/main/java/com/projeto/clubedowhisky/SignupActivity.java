@@ -1,5 +1,6 @@
 package com.projeto.clubedowhisky;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -60,36 +61,38 @@ public class SignupActivity extends AppCompatActivity {
         Helper helper = new Helper();
         if (this.username.length() == 0) {
             this.signupUsername.setError(getString(R.string.error_field_empty));
-            return Boolean.valueOf(false);
+            return Boolean.FALSE;
         } else if (this.username.length() < 5) {
             this.signupUsername.setError(getString(R.string.error_small_username));
-            return Boolean.valueOf(false);
+            return Boolean.FALSE;
         } else if (!helper.isValidLogin(this.username)) {
             this.signupUsername.setError(getString(R.string.error_wrong_format));
-            return Boolean.valueOf(false);
+            return Boolean.FALSE;
         } else if (this.fullname.length() == 0) {
             this.signupFullname.setError(getString(R.string.error_field_empty));
-            return Boolean.valueOf(false);
+            return Boolean.FALSE;
         } else if (this.password.length() == 0) {
             this.signupPassword.setError(getString(R.string.error_field_empty));
-            return Boolean.valueOf(false);
+            return Boolean.FALSE;
         } else if (this.password.length() < 6) {
             this.signupPassword.setError(getString(R.string.error_small_password));
-            return Boolean.valueOf(false);
+            return Boolean.FALSE;
         } else if (!helper.isValidPassword(this.password)) {
             this.signupPassword.setError(getString(R.string.error_wrong_format));
-            return Boolean.valueOf(false);
+            return Boolean.FALSE;
         } else if (this.email.length() == 0) {
             this.signupEmail.setError(getString(R.string.error_field_empty));
-            return Boolean.valueOf(false);
+            return Boolean.FALSE;
         } else if (helper.isValidEmail(this.email)) {
-            return Boolean.valueOf(true);
+            this.signupEmail.setError(getString(R.string.error_email));
+            return Boolean.FALSE;
         } else {
             this.signupEmail.setError(getString(R.string.error_wrong_format));
-            return Boolean.valueOf(false);
+            return Boolean.FALSE;
         }
     }
     public void onBackPressed() {
+        SignupActivity.this.startActivity(new Intent(SignupActivity.this, AppActivity.class));
         finish();
     }
 

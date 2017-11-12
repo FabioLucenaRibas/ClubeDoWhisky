@@ -5,13 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.projeto.clubedowhisky.classes.Drinks;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class ListDrinksAdapter extends BaseAdapter {
@@ -21,7 +19,6 @@ public class ListDrinksAdapter extends BaseAdapter {
     public ListDrinksAdapter(Context context, List<Drinks> drinks) {
         this.context = context;
         this.drinks = drinks;
-        drinks.add(new Drinks());
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -37,7 +34,6 @@ public class ListDrinksAdapter extends BaseAdapter {
 
             final Drinks drink = drinks.get(position);
 
-
             gridView = inflater.inflate(R.layout.item_ticket, null);
             ImageView drink_photo = gridView
                     .findViewById(R.id.drink_photos);
@@ -52,7 +48,7 @@ public class ListDrinksAdapter extends BaseAdapter {
 
             TextView drink_preco = gridView
                     .findViewById(R.id.drink_preco);
-            drink_preco.setText(formatarPreco(drink.getPreco()));
+            drink_preco.setText(Helper.formatarPreco(drink.getPreco()));
 
             switch (drink.getId()) {
                 case 1:
@@ -78,32 +74,6 @@ public class ListDrinksAdapter extends BaseAdapter {
                     break;
             }
 
-            // ImageButton add_dose = (ImageButton) gridView.findViewById(R.id.add_dose);
-            //ImageButton remove_dose = (ImageButton) gridView.findViewById(R.id.remove_dose);
-
-
-            // add_dose.setOnClickListener(new View.OnClickListener(){
-            //     @Override
-            //    public void onClick(View v) {
-            //         int value = drink.getQuantities();
-            //         value += 1;
-            //        drink.setQuantities(value);
-            //
-            //        notifyDataSetChanged();
-            //   }
-            //});
-
-            //remove_dose.setOnClickListener(new View.OnClickListener(){
-            //    @Override
-            //   public void onClick(View v) {
-            //       int value = drink.getQuantities();
-            //       value -= 1;
-            //       drink.setQuantities(value);
-            //
-            //       notifyDataSetChanged();
-            //   }
-            //});
-
         } else {
             gridView = convertView;
         }
@@ -124,12 +94,6 @@ public class ListDrinksAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return 0;
-    }
-
-    private String formatarPreco(BigDecimal value) {
-        String retorno = "R$ ";
-        retorno += value.toPlainString().replace(".", ",");
-        return retorno;
     }
 
 }

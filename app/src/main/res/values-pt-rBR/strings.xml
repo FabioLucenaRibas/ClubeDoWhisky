@@ -3,11 +3,15 @@
 
     <string name="action_settings">Configurações</string>
     <string name="action_login">Entrar</string>
-    <string name="action_logout">Sair</string>
     <string name="action_signup">Registrar</string>
     <string name="action_forgot_password">Esqueceu sua senha?</string>
     <string name="action_continue">Continue</string>
-    <string name="action_confirm">Confirmar</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_add_to_cart">Adicionar ao carrinho</string>
+    <string name="action_yes">Sim</string>
+    <string name="action_no">Não</string>
+    <string name="action_keep_buying">Deseja continuar comprando?</string>
 
     <string name="placeholder_login">Login</string>
     <string name="placeholder_fullname">Nome completo</string>
@@ -15,13 +19,13 @@
     <string name="placeholder_email">E-mail</string>
 
     <string name="title_activity_login">Entrar</string>
-    <string name="title_activity_main">General</string>
     <string name="title_activity_sign_up">Cadastro</string>
     <string name="title_activity_recovery">Recuperar senha</string>
     <string name="title_activity_ticket">Ticket</string>
+    <string name="title_activity_add_to_cart">Adicionar ao carrinho</string>
 
     <string name="error_data_loading">Verifique a sua conexão de rede.</string>
-    <string name="error_email">Email invalido.</string>
+    <string name="error_email">E-mail invalido.</string>
     <string name="error_email_taken">Já existe um usuário cadastrado com o email informado.</string>
     <string name="error_field_empty">Os campos obrigatórios estão vazios</string>
     <string name="error_internet_connection">Sem conexão à internet</string>
@@ -32,14 +36,16 @@
     <string name="error_small_username">Mínimo de 5 caracteres</string>
     <string name="error_wrong_format">Formato incorreto</string>
 
-    <string name="label_add_drink">Adicionar</string>
+    <string name="label_unitary_value">Valor Unitario (Dose):</string>
     <string name="label_starting_at">A partir de</string>
-    <string name="label_amount">Valor total</string>
-    <string name="label_moeda">R$</string>
+    <string name="label_total">Total:</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="drink_photo">Foto da bebida</string>
+    <string name="logo_club_whisky">Logotipo do clube do whisky</string>
+
+    <string name="dialog_exit">Deseja sair do Clube do Whisky</string>
 
 </resources>

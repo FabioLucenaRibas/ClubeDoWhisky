@@ -1,12 +1,15 @@
 package com.projeto.clubedowhisky;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity
     GridView gridView;
     List<Drinks> drinks = new ArrayList<>();
     GridAdapter adapter;
+
+    private FragmentActivity myContext;
 
     static final int REQUEST_CODE = 1;
 
@@ -60,29 +65,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Drinks item = new Drinks();
-        item.setId(1);
-        item.setQuantities(15);
-        item.setName("Whisky Old Parr 12 anos");
-        drinks.add(item);
-
-        Drinks item2 = new Drinks();
-        item2.setId(2);
-        item2.setQuantities(06);
-        item2.setName("Whisky Jack Daniels Honey");
-        drinks.add(item2);
-
-        Drinks item3 = new Drinks();
-        item3.setId(3);
-        item3.setQuantities(06);
-        item3.setName("Whisky Jack Daniels Honey");
-        drinks.add(item3);
-
-        Drinks item4 = new Drinks();
-        item4.setId(4);
-        item4.setQuantities(06);
-        item4.setName("Whisky Jack Daniels Honey");
-        drinks.add(item4);
+        obterListaTicketsCliente();
 
         gridView = (GridView) findViewById(R.id.gridView1);
         adapter = new GridAdapter(this, drinks);
@@ -120,8 +103,31 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            openDialogExit();
+            //super.onBackPressed();
         }
+    }
+
+    public void openDialogExit() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(R.string.dialog_exit);
+        alertDialogBuilder.setPositiveButton(R.string.action_ok,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finishAndRemoveTask();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton(R.string.action_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
@@ -170,5 +176,21 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
+    }
+
+    private void obterListaTicketsCliente() {
+        // Implementar consulta do serviço e gravar no sqlLite
+
+        Drinks item = new Drinks();
+        item.setId(1);
+        item.setQuantities(15);
+        item.setName("Whisky Old Parr 12 anos");
+        drinks.add(item);
+
+        Drinks item2 = new Drinks();
+        item2.setId(2);
+        item2.setQuantities(6);
+        item2.setName("Whisky Jack Daniels Honey");
+        drinks.add(item2);
     }
 }

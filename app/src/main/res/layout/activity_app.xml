@@ -15,11 +15,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1.0">
 
             <ImageView
-                android:id="@+id/appLogoView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="false"
@@ -28,6 +27,7 @@
                 android:layout_alignWithParentIfMissing="false"
                 android:layout_centerInParent="true"
                 android:focusableInTouchMode="false"
+                android:contentDescription="@string/logo_club_whisky"
                 android:src="@drawable/logo" />
         </RelativeLayout>
 
@@ -56,7 +56,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/button_blue"
+                android:background="@drawable/button_brown"
                 android:text="@string/action_login"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
@@ -78,7 +78,6 @@
             android:src="@drawable/logo" />
 
         <ProgressBar
-            android:id="@+id/progressBar2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/appLogoView2"

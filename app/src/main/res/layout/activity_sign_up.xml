@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.teste.clubedowhisky.AppActivity">
+    tools:context="com.projeto.clubedowhisky.AppActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -29,12 +29,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_signupUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
@@ -51,7 +50,6 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_signupFullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
@@ -68,7 +66,6 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_signupPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
@@ -77,7 +74,7 @@
                     android:id="@+id/signupPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+                    android:layout_gravity="center_horizontal|fill_horizontal|center|fill|start|end"
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="@string/placeholder_password"
@@ -86,7 +83,6 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_signupEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
@@ -107,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/button_blue"
+                android:background="@drawable/button_brown"
                 android:text="@string/action_signup"
                 android:textColor="@color/white"
                 android:textStyle="bold" />

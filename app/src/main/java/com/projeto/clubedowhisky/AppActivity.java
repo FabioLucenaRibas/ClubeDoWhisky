@@ -28,11 +28,13 @@ public class AppActivity extends AppCompatActivity {
         this.loginBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 AppActivity.this.startActivity(new Intent(AppActivity.this, LoginActivity.class));
+                finish();
             }
         });
         this.signupBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 AppActivity.this.startActivity(new Intent(AppActivity.this, SignupActivity.class));
+                finish();
             }
         });
 

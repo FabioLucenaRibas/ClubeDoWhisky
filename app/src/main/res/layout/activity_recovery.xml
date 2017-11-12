@@ -25,7 +25,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -43,9 +43,9 @@
                 android:id="@+id/PasswordRecoveryBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+                android:layout_gravity="center_horizontal|fill_horizontal|center|fill|start|end"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/button_blue"
+                android:background="@drawable/button_brown"
                 android:text="@string/action_continue"
                 android:textColor="@color/white"
                 android:textStyle="bold" />

@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (username.equals("admin") && password.equals("12345")) {
                     LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
                 }
                 //     if (!App.getInstance().isConnected()) {
                 //         Toast.makeText(LoginActivity.this.getApplicationContext(), R.string.msg_network_error, 0).show();
@@ -62,23 +63,24 @@ public class LoginActivity extends AppCompatActivity {
         this.signinUsername.setError(null);
         Helper helper = new Helper();
         if (this.username.length() != 0) {
-            return Boolean.valueOf(true);
+            return Boolean.TRUE;
         }
         this.signinUsername.setError(getString(R.string.error_field_empty));
-        return Boolean.valueOf(false);
+        return Boolean.FALSE;
     }
 
     public Boolean checkPassword() {
         this.password = this.signinPassword.getText().toString();
         this.signinPassword.setError(null);
         if (this.username.length() != 0) {
-            return Boolean.valueOf(true);
+            return Boolean.TRUE;
         }
         this.signinPassword.setError(getString(R.string.error_field_empty));
-        return Boolean.valueOf(false);
+        return Boolean.FALSE;
     }
 
     public void onBackPressed() {
+        LoginActivity.this.startActivity(new Intent(LoginActivity.this, AppActivity.class));
         finish();
     }
 
