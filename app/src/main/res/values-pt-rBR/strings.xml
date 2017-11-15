@@ -2,6 +2,7 @@
     <string name="app_name">Clube do Whisky</string>
 
     <string name="action_settings">Configurações</string>
+    <string name="action_map">Mapa</string>
     <string name="action_login">Entrar</string>
     <string name="action_signup">Registrar</string>
     <string name="action_forgot_password">Esqueceu sua senha?</string>
@@ -23,6 +24,7 @@
     <string name="title_activity_recovery">Recuperar senha</string>
     <string name="title_activity_ticket">Ticket</string>
     <string name="title_activity_add_to_cart">Adicionar ao carrinho</string>
+    <string name="title_activity_maps">Bares e restaurantes</string>
 
     <string name="error_data_loading">Verifique a sua conexão de rede.</string>
     <string name="error_email">E-mail invalido.</string>

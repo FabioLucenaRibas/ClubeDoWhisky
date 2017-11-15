@@ -2,16 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.projeto.clubedowhisky">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:theme="@style/AppTheme">
         <activity
-            android:name="com.projeto.clubedowhisky.AppActivity"
+            android:name=".AppActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
@@ -22,34 +30,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.projeto.clubedowhisky.LoginActivity"
+            android:name=".LoginActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" />
-
         <activity
-            android:name="com.projeto.clubedowhisky.SignupActivity"
+            android:name=".SignupActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_sign_up"
             android:screenOrientation="portrait" />
-
         <activity
-            android:name="com.projeto.clubedowhisky.RecoveryActivity"
+            android:name=".RecoveryActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_recovery"
             android:screenOrientation="portrait" />
-
-        <activity android:label="@string/app_name" android:name="com.projeto.clubedowhisky.MainActivity"></activity>
-
         <activity
-            android:label="@string/title_activity_add_to_cart"
-            android:name="com.projeto.clubedowhisky.AddCartActivity"></activity>
-
+            android:name=".MainActivity"
+            android:label="@string/app_name" />
         <activity
-            android:name="com.projeto.clubedowhisky.TicketActivity"
+            android:name=".AddCartActivity"
+            android:label="@string/title_activity_add_to_cart" />
+        <activity
+            android:name=".TicketActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_ticket"
             android:screenOrientation="portrait" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>
