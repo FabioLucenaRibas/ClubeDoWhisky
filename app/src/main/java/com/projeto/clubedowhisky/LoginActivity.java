@@ -39,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
                 LoginActivity.this.username = LoginActivity.this.signinUsername.getText().toString();
                 LoginActivity.this.password = LoginActivity.this.signinPassword.getText().toString();
 
+
+                // TODO CRIAR CHAMADA PARA VERIFICAR SE LOGIN E SENHA ESTAO CADASTRADO NA BASE
                 if (username.equals("admin") && password.equals("12345")) {
                     LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();

@@ -30,6 +30,9 @@ public class RecoveryActivity extends AppCompatActivity {
         this.mContinueBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RecoveryActivity.this.email = RecoveryActivity.this.mEmail.getText().toString();
+
+                // TODO CRIAR CHAMADA PASSANDO O E-MAIL NO QUAL SERA ENVIADO A NOVA SENHA
+
             //    if (!App.getInstance().isConnected()) {
             //        Toast.makeText(RecoveryActivity.this.getApplicationContext(), R.string.msg_network_error, 0).show();
             //    } else if (new Helper().isValidEmail(RecoveryActivity.this.email)) {

@@ -44,6 +44,8 @@ public class SignupActivity extends AppCompatActivity {
                 SignupActivity.this.password = SignupActivity.this.signupPassword.getText().toString();
                 SignupActivity.this.email = SignupActivity.this.signupEmail.getText().toString();
 
+                // TODO CRIAR CHAMADA PARA REGISTRAR CLIENTE
+
                 if (!SignupActivity.this.verifyRegForm().booleanValue()) {
                     return;
                 }

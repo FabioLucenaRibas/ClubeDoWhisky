@@ -32,6 +32,7 @@ public class TicketActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        // TODO CRIAR CHAMADA PARA BUSCAR UMA LISTA DE BEBIDAS
         obterBebidas();
 
         listView = (ListView) findViewById(R.id.listBebidasTicket);

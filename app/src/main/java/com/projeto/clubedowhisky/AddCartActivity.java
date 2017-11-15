@@ -170,14 +170,14 @@ public class AddCartActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        // CHAMAR METODO PARA ADICIONAR NO CARRINHO E IR PARA TELA DE CARRINHO
+                        // TODO CHAMAR METODO PARA ADICIONAR NO CARRINHO (SQLLITE)  E IR PARA TELA DE CARRINHO
                     }
                 });
 
         alertDialogBuilder.setNegativeButton(R.string.action_no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //CHAMAR METODO PARA ADICIONAR NO CARRINHO E VOLTAR PARA LISTA DE TICKETS
+                // TODO CHAMAR METODO PARA ADICIONAR NO CARRINHO (SQLLITE) E VOLTAR PARA LISTA DE TICKETS
             }
         });
 
