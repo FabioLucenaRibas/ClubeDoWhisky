@@ -14,14 +14,15 @@ public class Users {
     private String createdAt;
 
     private String email;
+    private String username;
+
     @SerializedName("is_enabled")
     private Boolean isEnabled;
-
     private String name;
+
     private String password;
     @SerializedName("updated_at")
     private String updatedAt;
-
     public int getId() {
         return id;
     }
@@ -78,4 +79,11 @@ public class Users {
         this.updatedAt = updatedAt;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
