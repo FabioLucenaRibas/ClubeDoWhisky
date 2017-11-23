@@ -116,12 +116,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     @Override
     public void onLoadFinished(Loader<Clients> loader, Clients data) {
         if (data != null){
-            
+            LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
         }
     }
 
     @Override
     public void onLoaderReset(Loader<Clients> loader) {
-
     }
 }
