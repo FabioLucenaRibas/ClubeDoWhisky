@@ -31,6 +31,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mLoaderManager = LoginActivity.this.getSupportLoaderManager();
+        mLoaderManager.initLoader(0, null, LoginActivity.this);
+
         this.toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (this.toolbar != null) {
             setSupportActionBar(this.toolbar);
@@ -45,21 +48,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
                 LoginActivity.this.username = LoginActivity.this.signinUsername.getText().toString();
                 LoginActivity.this.password = LoginActivity.this.signinPassword.getText().toString();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("username", username);
-                bundle.putString("password", password);
+                if (username != "" && password != ""){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username", username);
+                    bundle.putString("password", password);
 
-                mLoaderManager = LoginActivity.this.getSupportLoaderManager();
-                mLoaderManager.initLoader(0, bundle, LoginActivity.this);
+                    mLoaderManager.initLoader(1, bundle, LoginActivity.this);
+                }
 //                if (username.equals("admin") && password.equals("12345")) {
 //                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //                    finish();
 //                }
-                //     if (!App.getInstance().isConnected()) {
-                //         Toast.makeText(LoginActivity.this.getApplicationContext(), R.string.msg_network_error, 0).show();
-                //     } else if (LoginActivity.this.checkUsername().booleanValue() && LoginActivity.this.checkPassword().booleanValue()) {
-                //         LoginActivity.this.signin();
-                //     }
             }
         });
         this.mActionForgot = (TextView) findViewById(R.id.actionForgot);
@@ -108,8 +107,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
     @Override
     public Loader<Clients> onCreateLoader(int id, Bundle args) {
-        String username = args.getString("username");
-        String password = args.getString("password");
+        if (args != null){
+            String username = args.getString("username");
+            String password = args.getString("password");
+        }else{
+            String username = "";
+            String password = "";
+        }
         return new LoginTask(getApplicationContext(), username, password);
     }
 

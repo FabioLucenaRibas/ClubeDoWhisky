@@ -2,6 +2,7 @@ package com.projeto.clubedowhisky.httpClient;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
+import android.util.Log;
 
 import com.projeto.clubedowhisky.classes.Clients;
 
@@ -21,6 +22,17 @@ public class LoginTask extends AsyncTaskLoader<Clients> {
         super(context);
         mUsername = username;
         mPassword = password;
+    }
+
+    @Override
+    protected void onStartLoading() {
+        super.onStartLoading();
+        if (clients == null){
+            Log.d("NGVL","forceLoad");
+            forceLoad();
+        } else {
+            deliverResult(clients);
+        }
     }
 
     @Override

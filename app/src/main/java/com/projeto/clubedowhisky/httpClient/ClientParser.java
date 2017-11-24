@@ -23,7 +23,7 @@ public class ClientParser {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.25.6:8080/clubedowhisky-API/")
+                .baseUrl("http://192.168.160.2:8080/clubedowhisky-API/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
