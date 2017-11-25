@@ -10,6 +10,7 @@ public class Drinks implements Parcelable {
     private Integer quantities = 0;
     private String descricao = "";
     private Double preco = 0.0;
+    private Double amountValue = 0.0;
 
     public Integer getId() {
         return id;
@@ -51,6 +52,14 @@ public class Drinks implements Parcelable {
         this.preco = preco;
     }
 
+    public Double getAmountValue() {
+        return amountValue;
+    }
+
+    public void setAmountValue(Double amountValue) {
+        this.amountValue = amountValue;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -63,6 +72,7 @@ public class Drinks implements Parcelable {
         dest.writeValue(this.quantities);
         dest.writeString(this.descricao);
         dest.writeValue(this.preco);
+        dest.writeValue(this.amountValue);
     }
 
     public Drinks() {
@@ -74,6 +84,7 @@ public class Drinks implements Parcelable {
         this.quantities = (Integer) in.readValue(Integer.class.getClassLoader());
         this.descricao = in.readString();
         this.preco = (Double) in.readValue(Double.class.getClassLoader());
+        this.amountValue = (Double) in.readValue(Double.class.getClassLoader());
     }
 
     public static final Creator<Drinks> CREATOR = new Creator<Drinks>() {
@@ -87,4 +98,5 @@ public class Drinks implements Parcelable {
             return new Drinks[size];
         }
     };
+
 }

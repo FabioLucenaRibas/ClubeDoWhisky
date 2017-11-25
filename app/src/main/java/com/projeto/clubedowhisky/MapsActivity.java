@@ -69,12 +69,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // TODO CRIAR CHAMADA PARA BUSCAR LISTA DE BARES E RESTAURANTES E ATRIBUIR AO addMarker PARA EXIBIR NO MAPA
 
-        LatLng currentLocation = new LatLng(-8.1518139, -34.9193298);
-        mMap.addMarker(new MarkerOptions().position(currentLocation).title("Tempero da Galega"));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17.0f));
-
-        //LatLng currentLocation = new LatLng(latitude, longitude);
+        LatLng currentLocation1 = new LatLng(-8.1518139, -34.9193298);
+        mMap.addMarker(new MarkerOptions().position(currentLocation1).title("Tempero da Galega"));
         //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17.0f));
+
+        LatLng currentLocation = new LatLng(latitude, longitude);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17.0f));
 
         int checkPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
         if (checkPermission != PackageManager.PERMISSION_GRANTED) {

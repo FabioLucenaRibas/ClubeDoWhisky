@@ -9,10 +9,12 @@
     <string name="action_continue">Continue</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Cancel</string>
+    <string name="action_confirm">Confirm</string>
     <string name="action_yes">Yes</string>
     <string name="action_no">No</string>
     <string name="action_add_to_cart">Add to cart</string>
     <string name="action_keep_buying">Do you want to continue shopping?</string>
+    <string name="action_finalize">Finalize</string>
 
     <string name="placeholder_login">Username</string>
     <string name="placeholder_fullname">Fullname</string>
@@ -25,6 +27,7 @@
     <string name="title_activity_ticket">Ticket</string>
     <string name="title_activity_add_to_cart">Add to cart</string>
     <string name="title_activity_maps">Bars and restaurants</string>
+    <string name="title_activity_cart">My cart</string>
 
     <string name="error_data_loading">When loading data error has occurred. Check your network connection.</string>
     <string name="error_email">E-mail invalido.</string>
@@ -49,5 +52,8 @@
     <string name="logo_club_whisky">Whiskey Club Logo</string>
 
     <string name="dialog_exit">Want to quit the Whiskey Club</string>
+    <string name="dialog_title_remover_item">Remover item</string>
+    <string name="dialog_remover_item">Do you want to remove the item from the cart?</string>
+
 
 </resources>

@@ -9,10 +9,12 @@
     <string name="action_continue">Continue</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Cancelar</string>
+    <string name="action_confirm">Confirmar</string>
     <string name="action_add_to_cart">Adicionar ao carrinho</string>
     <string name="action_yes">Sim</string>
     <string name="action_no">Não</string>
     <string name="action_keep_buying">Deseja continuar comprando?</string>
+    <string name="action_finalize">Finalizar</string>
 
     <string name="placeholder_login">Login</string>
     <string name="placeholder_fullname">Nome completo</string>
@@ -25,6 +27,7 @@
     <string name="title_activity_ticket">Ticket</string>
     <string name="title_activity_add_to_cart">Adicionar ao carrinho</string>
     <string name="title_activity_maps">Bares e restaurantes</string>
+    <string name="title_activity_cart">Meu carrinho</string>
 
     <string name="error_data_loading">Verifique a sua conexão de rede.</string>
     <string name="error_email">E-mail invalido.</string>
@@ -49,5 +52,7 @@
     <string name="logo_club_whisky">Logotipo do clube do whisky</string>
 
     <string name="dialog_exit">Deseja sair do Clube do Whisky</string>
+    <string name="dialog_title_remover_item">Remover item</string>
+    <string name="dialog_remover_item">Deseja remover o item do carrinho?</string>
 
 </resources>

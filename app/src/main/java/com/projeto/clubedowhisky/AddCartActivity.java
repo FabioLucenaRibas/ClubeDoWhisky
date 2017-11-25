@@ -181,6 +181,8 @@ public class AddCartActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+
+                startActivity(new Intent(AddCartActivity.this, CartActivity.class));
                 // TODO CHAMAR METODO PARA ADICIONAR NO CARRINHO (SQLLITE)  E IR PARA TELA DE CARRINHO
 
             }
