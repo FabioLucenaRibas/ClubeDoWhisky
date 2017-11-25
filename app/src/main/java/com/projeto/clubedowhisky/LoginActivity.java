@@ -2,6 +2,8 @@ package com.projeto.clubedowhisky;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -10,7 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity {
+import com.projeto.clubedowhisky.classes.Clients;
+import com.projeto.clubedowhisky.httpClient.LoginTask;
+
+public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Clients>{
 
     TextView mActionForgot;
     String password;
@@ -19,11 +24,15 @@ public class LoginActivity extends AppCompatActivity {
     EditText signinUsername;
     Toolbar toolbar;
     String username;
+    LoaderManager mLoaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mLoaderManager = LoginActivity.this.getSupportLoaderManager();
+        mLoaderManager.initLoader(0, null, LoginActivity.this);
 
         this.toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (this.toolbar != null) {
@@ -39,17 +48,17 @@ public class LoginActivity extends AppCompatActivity {
                 LoginActivity.this.username = LoginActivity.this.signinUsername.getText().toString();
                 LoginActivity.this.password = LoginActivity.this.signinPassword.getText().toString();
 
+                if (username != "" && password != ""){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username", username);
+                    bundle.putString("password", password);
 
-                // TODO CRIAR CHAMADA PARA VERIFICAR SE LOGIN E SENHA ESTAO CADASTRADO NA BASE
-                if (username.equals("admin") && password.equals("12345")) {
-                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
+                    mLoaderManager.initLoader(1, bundle, LoginActivity.this);
                 }
-                //     if (!App.getInstance().isConnected()) {
-                //         Toast.makeText(LoginActivity.this.getApplicationContext(), R.string.msg_network_error, 0).show();
-                //     } else if (LoginActivity.this.checkUsername().booleanValue() && LoginActivity.this.checkPassword().booleanValue()) {
-                //         LoginActivity.this.signin();
-                //     }
+//                if (username.equals("admin") && password.equals("12345")) {
+//                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                    finish();
+//                }
             }
         });
         this.mActionForgot = (TextView) findViewById(R.id.actionForgot);
@@ -96,4 +105,27 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public Loader<Clients> onCreateLoader(int id, Bundle args) {
+        if (args != null){
+            String username = args.getString("username");
+            String password = args.getString("password");
+        }else{
+            String username = "";
+            String password = "";
+        }
+        return new LoginTask(getApplicationContext(), username, password);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Clients> loader, Clients data) {
+        if (data != null){
+            LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Clients> loader) {
+    }
 }
