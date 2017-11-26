@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.projeto.clubedowhisky.classes.Clients;
 import com.projeto.clubedowhisky.httpClient.LoginTask;
 
-public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Clients>{
+public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Clients> {
 
     TextView mActionForgot;
     String password;
@@ -48,17 +48,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
                 LoginActivity.this.username = LoginActivity.this.signinUsername.getText().toString();
                 LoginActivity.this.password = LoginActivity.this.signinPassword.getText().toString();
 
-                if (username != "" && password != ""){
+                if (!username.equals("") && !password.equals("")) {
                     Bundle bundle = new Bundle();
                     bundle.putString("username", username);
                     bundle.putString("password", password);
 
                     mLoaderManager.initLoader(1, bundle, LoginActivity.this);
                 }
-//                if (username.equals("admin") && password.equals("12345")) {
-//                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//                    finish();
-//                }
+                //               if (username.equals("admin") && password.equals("12345")) {
+                //                   LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                //                   finish();
+                //               }
             }
         });
         this.mActionForgot = (TextView) findViewById(R.id.actionForgot);
@@ -107,10 +107,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
     @Override
     public Loader<Clients> onCreateLoader(int id, Bundle args) {
-        if (args != null){
+        if (args != null) {
             String username = args.getString("username");
             String password = args.getString("password");
-        }else{
+        } else {
             String username = "";
             String password = "";
         }
@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
     @Override
     public void onLoadFinished(Loader<Clients> loader, Clients data) {
-        if (data != null){
+        if (data != null) {
             LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }

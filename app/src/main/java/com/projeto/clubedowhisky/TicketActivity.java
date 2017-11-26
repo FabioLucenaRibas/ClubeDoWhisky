@@ -1,7 +1,10 @@
 package com.projeto.clubedowhisky;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -44,11 +47,29 @@ public class TicketActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-                Drinks drink = (Drinks) adapter.getItem(position);
+                Drinks drink = drinks.get(position);
 
-                Intent i = new Intent(TicketActivity.this, AddCartActivity.class);
-                i.putExtra("drink", drink);
-                startActivity(i);
+                int orientation = TicketActivity.this.getResources().getConfiguration().orientation;
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    Intent i = new Intent(TicketActivity.this, AddCartActivity.class);
+                    i.putExtra("drink", drink);
+                    startActivity(i);
+                } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+                    AddCartFragment addCartFragment = new AddCartFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("drink", drink);
+                    addCartFragment.setArguments(bundle);
+
+                    FragmentManager fm = getSupportFragmentManager();
+
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragment_content, addCartFragment);
+                    ft.commit();
+
+                }
+
             }
         });
 
@@ -77,7 +98,7 @@ public class TicketActivity extends AppCompatActivity {
         }
     }
 
-    public void obterBebidas(){
+    public void obterBebidas() {
         Drinks item = new Drinks();
         item.setId(1);
         item.setName("Whisky Old Parr 12 anos");

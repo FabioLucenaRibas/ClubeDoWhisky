@@ -53,8 +53,7 @@
         <activity
             android:name=".TicketActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:label="@string/title_activity_ticket"
-            android:screenOrientation="portrait" />
+            android:label="@string/title_activity_ticket" />
         <activity
             android:name=".CartActivity"
             android:configChanges="keyboardHidden|orientation"

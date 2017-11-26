@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context="com.projeto.clubedowhisky.AppActivity">
+    tools:context="com.projeto.clubedowhisky.TicketActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

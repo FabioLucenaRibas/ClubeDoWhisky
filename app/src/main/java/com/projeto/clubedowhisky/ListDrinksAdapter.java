@@ -1,7 +1,6 @@
 package com.projeto.clubedowhisky;
 
-import android.content.Context;
-import android.view.LayoutInflater;
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,72 +12,60 @@ import com.projeto.clubedowhisky.classes.Drinks;
 import java.util.List;
 
 public class ListDrinksAdapter extends BaseAdapter {
-    private Context context;
+    private final Activity act;
     private List<Drinks> drinks;
 
-    public ListDrinksAdapter(Context context, List<Drinks> drinks) {
-        this.context = context;
+    public ListDrinksAdapter(Activity act, List<Drinks> drinks) {
+        this.act = act;
         this.drinks = drinks;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = act.getLayoutInflater().inflate(R.layout.item_ticket, parent, false);
 
-        View gridView;
+        final Drinks drink = drinks.get(position);
 
-        if (convertView == null) {
+        ImageView drink_photo = view
+                .findViewById(R.id.drink_photos);
 
-            //gridView = new View(context);
+        TextView drink_name = view
+                .findViewById(R.id.drink_name);
+        drink_name.setText(drink.getName());
 
-            final Drinks drink = drinks.get(position);
+        TextView drink_descricao = view
+                .findViewById(R.id.drink_descricao);
+        drink_descricao.setText(drink.getDescricao());
 
-            gridView = inflater.inflate(R.layout.item_ticket, null);
-            ImageView drink_photo = gridView
-                    .findViewById(R.id.drink_photos);
+        TextView drink_preco = view
+                .findViewById(R.id.drink_preco);
+        drink_preco.setText(Helper.formatarPreco(drink.getPreco()));
 
-            TextView drink_name = gridView
-                    .findViewById(R.id.drink_name);
-            drink_name.setText(drink.getName());
-
-            TextView drink_descricao = gridView
-                    .findViewById(R.id.drink_descricao);
-            drink_descricao.setText(drink.getDescricao());
-
-            TextView drink_preco = gridView
-                    .findViewById(R.id.drink_preco);
-            drink_preco.setText(Helper.formatarPreco(drink.getPreco()));
-
-            switch (drink.getId()) {
-                case 1:
-                    drink_photo.setImageResource(R.drawable.whisky_old_parr_12_anos);
-                    break;
-                case 2:
-                    drink_photo.setImageResource(R.drawable.whisky_jack_daniels_honey);
-                    break;
-                case 3:
-                    drink_photo.setImageResource(R.drawable.whisky_chivas_regal_12_anos);
-                    break;
-                case 4:
-                    drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_blue);
-                    break;
-                case 5:
-                    drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_double);
-                    break;
-                case 6:
-                    drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_black);
-                    break;
-                case 7:
-                    drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_red);
-                    break;
-            }
-
-        } else {
-            gridView = convertView;
+        switch (drink.getId()) {
+            case 1:
+                drink_photo.setImageResource(R.drawable.whisky_old_parr_12_anos);
+                break;
+            case 2:
+                drink_photo.setImageResource(R.drawable.whisky_jack_daniels_honey);
+                break;
+            case 3:
+                drink_photo.setImageResource(R.drawable.whisky_chivas_regal_12_anos);
+                break;
+            case 4:
+                drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_blue);
+                break;
+            case 5:
+                drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_double);
+                break;
+            case 6:
+                drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_black);
+                break;
+            case 7:
+                drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_red);
+                break;
         }
 
-        return gridView;
+        return view;
     }
 
     @Override

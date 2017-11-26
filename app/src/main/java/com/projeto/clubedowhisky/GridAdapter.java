@@ -1,7 +1,6 @@
 package com.projeto.clubedowhisky;
 
-import android.content.Context;
-import android.view.LayoutInflater;
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,54 +12,41 @@ import com.projeto.clubedowhisky.classes.Drinks;
 import java.util.List;
 
 public class GridAdapter extends BaseAdapter {
-    private Context context;
+    private final Activity act;
     List<Drinks> drinks;
 
-    public GridAdapter(Context context, List<Drinks> drinks) {
-        this.context = context;
+    public GridAdapter(Activity act, List<Drinks> drinks) {
+        this.act = act;
         this.drinks = drinks;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = act.getLayoutInflater().inflate(R.layout.item, parent, false);
 
-        View gridView;
+        final Drinks drink = drinks.get(position);
 
-        if (convertView == null) {
+        ImageView drink_photo = view
+                .findViewById(R.id.drink_photos);
 
-            gridView = new View(context);
+        TextView drink_name = view
+                .findViewById(R.id.drink_name);
+        drink_name.setText(drink.getName());
 
-            Drinks drink = drinks.get(position);
+        TextView drink_quantities = view
+                .findViewById(R.id.drink_quantities);
+        drink_quantities.setText(drink.getQuantities().toString());
 
-            gridView = inflater.inflate(R.layout.item, null);
-            ImageView drink_photo = (ImageView) gridView
-                    .findViewById(R.id.drink_photos);
-
-            TextView drink_name = (TextView) gridView
-                    .findViewById(R.id.drink_name);
-            drink_name.setText(drink.getName());
-
-            TextView drink_quantities = (TextView) gridView
-                    .findViewById(R.id.drink_quantities);
-            drink_quantities.setText(drink.getQuantities().toString());
-
-            switch (drink.getId()) {
-                case 1:
-                    drink_photo.setImageResource(R.drawable.whisky_old_parr_12_anos);
-                    break;
-                case 2:
-                    drink_photo.setImageResource(R.drawable.whisky_jack_daniels_honey);
-                    break;
-            }
-
-
-        } else {
-            gridView = (View) convertView;
+        switch (drink.getId()) {
+            case 1:
+                drink_photo.setImageResource(R.drawable.whisky_old_parr_12_anos);
+                break;
+            case 2:
+                drink_photo.setImageResource(R.drawable.whisky_jack_daniels_honey);
+                break;
         }
 
-        return gridView;
+        return view;
     }
 
     @Override

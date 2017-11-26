@@ -1,11 +1,9 @@
 package com.projeto.clubedowhisky;
 
-import android.content.Context;
-import android.view.LayoutInflater;
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.projeto.clubedowhisky.classes.Drinks;
@@ -13,46 +11,33 @@ import com.projeto.clubedowhisky.classes.Drinks;
 import java.util.List;
 
 public class ListCartAdapter extends BaseAdapter {
-    private Context context;
-    ImageButton add_dose;
-    ImageButton remove_dose;
+    private final Activity act;
     private List<Drinks> drinks;
 
-    public ListCartAdapter(Context context, List<Drinks> drinks) {
-        this.context = context;
+    public ListCartAdapter(Activity act, List<Drinks> drinks) {
+        this.act = act;
         this.drinks = drinks;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = act.getLayoutInflater().inflate(R.layout.item_cart, parent, false);
 
-        View listView;
+        final Drinks drink = drinks.get(position);
 
-        if (convertView == null) {
+        TextView drink_name = view
+                .findViewById(R.id.drink_name);
+        drink_name.setText(drink.getName());
 
-            final Drinks drink = drinks.get(position);
+        TextView drink_quantities = view
+                .findViewById(R.id.drink_quantities);
+        drink_quantities.setText(drink.getQuantities().toString());
 
-            listView = inflater.inflate(R.layout.item_cart, null);
+        TextView drink_preco_total = view
+                .findViewById(R.id.drink_preco_total);
+        drink_preco_total.setText(Helper.formatarPreco(drink.getAmountValue()));
 
-            TextView drink_name = listView
-                    .findViewById(R.id.drink_name);
-            drink_name.setText(drink.getName());
-
-            TextView drink_quantities = listView
-                    .findViewById(R.id.drink_quantities);
-            drink_quantities.setText(drink.getQuantities().toString());
-
-            TextView drink_preco_total = listView
-                    .findViewById(R.id.drink_preco_total);
-            drink_preco_total.setText(Helper.formatarPreco(drink.getAmountValue()));
-
-        } else {
-            listView = convertView;
-        }
-
-        return listView;
+        return view;
     }
 
     @Override
