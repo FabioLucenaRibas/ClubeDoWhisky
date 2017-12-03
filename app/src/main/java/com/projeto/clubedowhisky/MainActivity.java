@@ -6,10 +6,12 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projeto.clubedowhisky.classes.Drinks;
+import com.projeto.clubedowhisky.pager.PagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity
     GridView gridView;
     List<Drinks> drinks = new ArrayList<>();
     GridAdapter adapter;
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
     private FragmentActivity myContext;
 
@@ -51,14 +56,14 @@ public class MainActivity extends AppCompatActivity
             setSupportActionBar(this.toolbar);
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, TicketActivity.class);
-                startActivityForResult(i, REQUEST_CODE);
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(MainActivity.this, TicketActivity.class);
+//                startActivityForResult(i, REQUEST_CODE);
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,25 +75,25 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         // TODO CRIAR CHAMADA PARA BUSCAR LISTA DE TICKETS QUE O CLIENTE LOGADO POSSUI
-        obterListaTicketsCliente();
+//        obterListaTicketsCliente();
 
-        gridView = (GridView) findViewById(R.id.gridView1);
-        adapter = new GridAdapter(this, drinks);
-        gridView.setAdapter(adapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-
-                Drinks drink = (Drinks) adapter.getItem(position);
-
-                Toast.makeText(
-                        getApplicationContext(),
-                        ((TextView) v.findViewById(R.id.drink_name))
-                                .getText(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
+//        gridView = (GridView) findViewById(R.id.gridView1);
+//        adapter = new GridAdapter(this, drinks);
+//        gridView.setAdapter(adapter);
+//
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View v,
+//                                    int position, long id) {
+//
+//                Drinks drink = (Drinks) adapter.getItem(position);
+//
+//                Toast.makeText(
+//                        getApplicationContext(),
+//                        ((TextView) v.findViewById(R.id.drink_name))
+//                                .getText(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        buildViewPager();
     }
 
     @Override
@@ -202,5 +207,34 @@ public class MainActivity extends AppCompatActivity
         item2.setQuantities(6);
         item2.setName("Whisky Jack Daniels Honey");
         drinks.add(item2);
+    }
+
+    private void buildViewPager(){
+        //Initializing viewPager
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+
+        //Initializing the tablayout
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_camera);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 }

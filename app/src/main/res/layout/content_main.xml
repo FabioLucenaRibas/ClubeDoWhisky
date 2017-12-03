@@ -29,33 +29,17 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
-        android:id="@id/scrollView"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <GridView
-            android:id="@+id/gridView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnWidth="100dp"
-            android:gravity="center"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth">
-
-        </GridView>
-    </ScrollView>
-</LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+        android:layout_weight="1" />
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        app:backgroundTint="@color/colorPrimary"
-        app:elevation="15dp"
-        app:srcCompat="@drawable/ic_add" />
-
+        android:layout_weight="0.1"
+        app:tabMode="fixed"
+        android:layout_below="@id/view_pager" />
+</LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
