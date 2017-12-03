@@ -48,17 +48,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
                 LoginActivity.this.username = LoginActivity.this.signinUsername.getText().toString();
                 LoginActivity.this.password = LoginActivity.this.signinPassword.getText().toString();
 
-                if (!username.equals("") && !password.equals("")) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("username", username);
-                    bundle.putString("password", password);
-
-                    mLoaderManager.initLoader(1, bundle, LoginActivity.this);
+                //            if (!username.equals("") && !password.equals("")) {
+                //    Bundle bundle = new Bundle();
+                //    bundle.putString("username", username);
+                //    bundle.putString("password", password);
+//
+                //                  mLoaderManager.initLoader(1, bundle, LoginActivity.this);
+                //            }
+                if (username.equals("admin") && password.equals("12345")) {
+                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
                 }
-                //               if (username.equals("admin") && password.equals("12345")) {
-                //                   LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                //                   finish();
-                //               }
             }
         });
         this.mActionForgot = (TextView) findViewById(R.id.actionForgot);

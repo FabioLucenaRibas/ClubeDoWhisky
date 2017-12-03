@@ -1,67 +1,73 @@
 package com.projeto.clubedowhisky;
 
 import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.projeto.clubedowhisky.classes.Drinks;
+import com.projeto.clubedowhisky.classes.ItemClickListener;
 
 import java.util.List;
 
-public class GridAdapter extends BaseAdapter {
+public class GridAdapter extends RecyclerView.Adapter {
     private final Activity act;
     List<Drinks> drinks;
+    public static ItemClickListener itemClickListener;
 
     public GridAdapter(Activity act, List<Drinks> drinks) {
         this.act = act;
         this.drinks = drinks;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = act.getLayoutInflater().inflate(R.layout.item, parent, false);
+        return new GridViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
 
         final Drinks drink = drinks.get(position);
 
-        ImageView drink_photo = view
-                .findViewById(R.id.drink_photos);
+        GridViewHolder holder = (GridViewHolder) viewHolder;
 
-        TextView drink_name = view
-                .findViewById(R.id.drink_name);
-        drink_name.setText(drink.getName());
+        holder.drink_name.setText(drink.getName());
 
-        TextView drink_quantities = view
-                .findViewById(R.id.drink_quantities);
-        drink_quantities.setText(drink.getQuantities().toString());
+        holder.drink_quantities.setText(drink.getQuantities().toString());
 
         switch (drink.getId()) {
             case 1:
-                drink_photo.setImageResource(R.drawable.whisky_old_parr_12_anos);
+                holder.drink_photo.setImageResource(R.drawable.whisky_old_parr_12_anos);
                 break;
             case 2:
-                drink_photo.setImageResource(R.drawable.whisky_jack_daniels_honey);
+                holder.drink_photo.setImageResource(R.drawable.whisky_jack_daniels_honey);
+                break;
+            case 3:
+                holder.drink_photo.setImageResource(R.drawable.whisky_chivas_regal_12_anos);
+                break;
+            case 4:
+                holder.drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_blue);
+                break;
+            case 5:
+                holder.drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_double);
+                break;
+            case 6:
+                holder.drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_black);
+                break;
+            case 7:
+                holder.drink_photo.setImageResource(R.drawable.whisky_johnn_e_walker_red);
                 break;
         }
+    }
 
-        return view;
+    public void setOnItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return drinks.size();
     }
-
-    @Override
-    public Object getItem(int position) {
-        return drinks.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
 }

@@ -14,16 +14,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projeto.clubedowhisky.classes.Drinks;
+import com.projeto.clubedowhisky.classes.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Toolbar toolbar;
-    GridView gridView;
+    RecyclerView gridView;
     List<Drinks> drinks = new ArrayList<>();
     GridAdapter adapter;
 
@@ -72,22 +73,28 @@ public class MainActivity extends AppCompatActivity
         // TODO CRIAR CHAMADA PARA BUSCAR LISTA DE TICKETS QUE O CLIENTE LOGADO POSSUI
         obterListaTicketsCliente();
 
-        gridView = (GridView) findViewById(R.id.gridView1);
+        gridView = (RecyclerView) findViewById(R.id.gridView1);
         adapter = new GridAdapter(this, drinks);
-        gridView.setAdapter(adapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-
-                Drinks drink = (Drinks) adapter.getItem(position);
+        adapter.setOnItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Drinks drink = drinks.get(position);
 
                 Toast.makeText(
                         getApplicationContext(),
-                        ((TextView) v.findViewById(R.id.drink_name))
+                        ((TextView) MainActivity.this.findViewById(R.id.drink_name))
                                 .getText(), Toast.LENGTH_SHORT).show();
             }
+
         });
+
+        gridView.setAdapter(adapter);
+
+
+        RecyclerView.LayoutManager layout = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+
+        gridView.setLayoutManager(layout);
 
     }
 

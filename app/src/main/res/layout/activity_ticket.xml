@@ -17,11 +17,11 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <ListView
-        android:id="@+id/listBebidasTicket"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listDrinksTicket"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.11" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
 

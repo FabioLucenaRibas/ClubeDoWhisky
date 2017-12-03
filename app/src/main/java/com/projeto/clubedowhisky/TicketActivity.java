@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.projeto.clubedowhisky.classes.Drinks;
+import com.projeto.clubedowhisky.classes.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
 public class TicketActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    ListView listView;
+    RecyclerView listDrinks;
     List<Drinks> drinks = new ArrayList<>();
     ListDrinksAdapter adapter;
 
@@ -38,15 +38,12 @@ public class TicketActivity extends AppCompatActivity {
         // TODO CRIAR CHAMADA PARA BUSCAR UMA LISTA DE BEBIDAS
         obterBebidas();
 
-        listView = (ListView) findViewById(R.id.listBebidasTicket);
+        listDrinks = (RecyclerView) findViewById(R.id.listDrinksTicket);
         adapter = new ListDrinksAdapter(this, drinks);
-        listView.setAdapter(adapter);
-        listView.setDivider(null);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-
+        adapter.setOnItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
                 Drinks drink = drinks.get(position);
 
                 int orientation = TicketActivity.this.getResources().getConfiguration().orientation;
@@ -69,9 +66,16 @@ public class TicketActivity extends AppCompatActivity {
                     ft.commit();
 
                 }
-
             }
         });
+
+
+        listDrinks.setAdapter(adapter);
+
+        RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
+
+        listDrinks.setLayoutManager(layout);
 
 
         //    if (!App.getInstance().isConnected()) {
