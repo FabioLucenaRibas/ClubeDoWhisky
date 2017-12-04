@@ -3,12 +3,16 @@ package com.projeto.clubedowhisky.classes;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Drinks implements Parcelable {
 
     private Integer id = 0;
     private String name = "";
     private Integer quantities = 0;
+    @SerializedName("description")
     private String descricao = "";
+    @SerializedName("price")
     private Double preco = 0.0;
     private Double amountValue = 0.0;
 

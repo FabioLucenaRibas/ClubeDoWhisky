@@ -5,6 +5,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -13,16 +15,18 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.projeto.clubedowhisky.classes.Drinks;
+import com.projeto.clubedowhisky.httpDrink.AllDrinksTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketActivity extends AppCompatActivity {
+public class TicketActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Drinks>> {
 
     Toolbar toolbar;
     ListView listView;
-    List<Drinks> drinks = new ArrayList<>();
+    ArrayList<Drinks> drinks = new ArrayList<>();
     ListDrinksAdapter adapter;
+    LoaderManager mLoaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +40,27 @@ public class TicketActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         // TODO CRIAR CHAMADA PARA BUSCAR UMA LISTA DE BEBIDAS
-        obterBebidas();
+        Bundle bundle = new Bundle();
+        bundle.putInt("limit", 20);
+        mLoaderManager = TicketActivity.this.getSupportLoaderManager();
+        mLoaderManager.initLoader(0, bundle, this);
 
+
+
+
+        //    if (!App.getInstance().isConnected()) {
+        //        Toast.makeText(RecoveryActivity.this.getApplicationContext(), R.string.msg_network_error, 0).show();
+        //    } else if (new Helper().isSValidEmail(RecoveryActivity.this.email)) {
+        //       RecoveryActivity.this.recovery();
+        //    } else {
+        //        Toast.makeText(RecoveryActivity.this.getApplicationContext(), RecoveryActivity.this.getText(R.string.error_email), 0).show();
+        //    }
+
+    }
+
+    private void carregarDrinks(){
         listView = (ListView) findViewById(R.id.listBebidasTicket);
-        adapter = new ListDrinksAdapter(this, drinks);
+        adapter = new ListDrinksAdapter(this, this.drinks);
         listView.setAdapter(adapter);
         listView.setDivider(null);
 
@@ -47,7 +68,7 @@ public class TicketActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-                Drinks drink = drinks.get(position);
+                Drinks drink = TicketActivity.this.drinks.get(position);
 
                 int orientation = TicketActivity.this.getResources().getConfiguration().orientation;
                 if (orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -72,16 +93,6 @@ public class TicketActivity extends AppCompatActivity {
 
             }
         });
-
-
-        //    if (!App.getInstance().isConnected()) {
-        //        Toast.makeText(RecoveryActivity.this.getApplicationContext(), R.string.msg_network_error, 0).show();
-        //    } else if (new Helper().isSValidEmail(RecoveryActivity.this.email)) {
-        //       RecoveryActivity.this.recovery();
-        //    } else {
-        //        Toast.makeText(RecoveryActivity.this.getApplicationContext(), RecoveryActivity.this.getText(R.string.error_email), 0).show();
-        //    }
-
     }
 
     public void onBackPressed() {
@@ -98,7 +109,8 @@ public class TicketActivity extends AppCompatActivity {
         }
     }
 
-    public void obterBebidas() {
+    public void obterBebidas(Bundle bundle) {
+
         Drinks item = new Drinks();
         item.setId(1);
         item.setName("Whisky Old Parr 12 anos");
@@ -147,5 +159,32 @@ public class TicketActivity extends AppCompatActivity {
         item7.setDescricao("O Whisky Johnnie Walker Red Label tem uma seleção inigualável de mais de 35 maltes na sua composição que garantem a sua superioridade. Com aroma doce amadeirado, cravo-da-índia e doce de manteiga e sabor rico com mel. Lançado em 1909");
         item7.setPreco(5.80);
         drinks.add(item7);
+    }
+
+    @Override
+    public Loader<ArrayList<Drinks>> onCreateLoader(int id, Bundle args) {
+        return new AllDrinksTask(getApplicationContext(), args.getInt("limit"));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<ArrayList<Drinks>> loader, ArrayList<Drinks> data) {
+        if (data != null){
+            for (int i = 0; i < data.size() ; i++) {
+                Drinks d = new Drinks();
+                d.setId(data.get(i).getId());
+                d.setName(data.get(i).getName());
+                d.setPreco(data.get(i).getPreco());
+                d.setQuantities(data.get(i).getQuantities());
+                d.setDescricao(data.get(i).getDescricao());
+                d.setAmountValue(data.get(i).getAmountValue());
+                drinks.add(i,d);
+            }
+            carregarDrinks();
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<ArrayList<Drinks>> loader) {
+
     }
 }
