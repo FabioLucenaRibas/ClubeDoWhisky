@@ -25,7 +25,9 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.projeto.clubedowhisky.classes.Clients;
 import com.projeto.clubedowhisky.classes.Drinks;
+import com.projeto.clubedowhisky.classes.Users;
 import com.projeto.clubedowhisky.pager.PagerAdapter;
 
 import java.util.ArrayList;
@@ -73,6 +75,17 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+
+        TextView nome =  headerView.findViewById(R.id.nome);
+        TextView email = headerView.findViewById(R.id.email);
+
+        Intent i = this.getIntent();
+
+        Users user = i.getParcelableExtra("user");
+
+        nome.setText(user.getName());
+        email.setText(user.getEmail());
 
         // TODO CRIAR CHAMADA PARA BUSCAR LISTA DE TICKETS QUE O CLIENTE LOGADO POSSUI
 //        obterListaTicketsCliente();

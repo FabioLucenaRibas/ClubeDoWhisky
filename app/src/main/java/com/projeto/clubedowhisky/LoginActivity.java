@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.projeto.clubedowhisky.classes.Clients;
+import com.projeto.clubedowhisky.classes.Users;
 import com.projeto.clubedowhisky.httpClient.LoginTask;
 
 public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Clients> {
@@ -55,10 +56,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
                     mLoaderManager.initLoader(1, bundle, LoginActivity.this);
                 }
-                //               if (username.equals("admin") && password.equals("12345")) {
-                //                   LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                //                   finish();
-                //               }
+                             //  if (username.equals("admin") && password.equals("12345")) {
+                             //      LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                             //      finish();
+                             //  }
             }
         });
         this.mActionForgot = (TextView) findViewById(R.id.actionForgot);
@@ -120,7 +121,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     @Override
     public void onLoadFinished(Loader<Clients> loader, Clients data) {
         if (data != null) {
-            LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            Users user = data.getUser();
+            i.putExtra("user" , user);
+
+            LoginActivity.this.startActivity(i);
             finish();
         }
     }
