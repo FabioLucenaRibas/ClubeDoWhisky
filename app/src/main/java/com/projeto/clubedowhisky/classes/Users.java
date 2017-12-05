@@ -2,11 +2,13 @@ package com.projeto.clubedowhisky.classes;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Renato on 20/11/2017.
  */
 
-public class Users {
+public class Users implements Serializable{
     @SerializedName("id")
     private int id;
 
