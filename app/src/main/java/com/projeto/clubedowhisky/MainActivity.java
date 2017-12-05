@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.projeto.clubedowhisky.classes.Clients;
 import com.projeto.clubedowhisky.classes.Drinks;
+import com.projeto.clubedowhisky.classes.Users;
 import com.projeto.clubedowhisky.pager.PagerAdapter;
 import com.projeto.clubedowhisky.tabs.HistoryFragment;
 import com.projeto.clubedowhisky.tabs.MyTicketsFragment;
@@ -79,6 +80,18 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+
+//        TextView nome =  headerView.findViewById(R.id.nome);
+        TextView email = headerView.findViewById(R.id.email);
+
+        Clients c = (Clients) getIntent().getSerializableExtra("client");
+        if (c != null){
+            email.setText(c.getUser().getEmail());
+        }else {
+            Users u = (Users) getIntent().getSerializableExtra("user");
+            email.setText(u.getEmail());
+        }
 
         // TODO CRIAR CHAMADA PARA BUSCAR LISTA DE TICKETS QUE O CLIENTE LOGADO POSSUI
 //        obterListaTicketsCliente();

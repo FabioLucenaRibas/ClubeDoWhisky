@@ -25,9 +25,10 @@ public class MyTicketsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_mytickets_main, container, false);
 
         Clients c = (Clients) getArguments().getSerializable("client");
-
-        Toast toast = Toast.makeText(getContext(), c.getUser().getName(), Toast.LENGTH_LONG);
-        toast.show();
+        if (c != null){
+            Toast toast = Toast.makeText(getContext(), c.getUser().getName(), Toast.LENGTH_LONG);
+            toast.show();
+        }
 
         mFab = root.findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {
