@@ -8,27 +8,32 @@ import com.projeto.clubedowhisky.tabs.HistoryFragment;
 import com.projeto.clubedowhisky.tabs.MyTicketsFragment;
 import com.projeto.clubedowhisky.tabs.QrcodeFragment;
 
+import java.util.List;
+
 /**
  * Created by pedrolima on 30/11/2017.
  */
 
 public class PagerAdapter extends FragmentPagerAdapter {
     private final String[] titles = new String[]{"", "Meus Tickets", "Histórico"};
+    private List<Fragment> mFragment;
 
-    public PagerAdapter(FragmentManager fm) {
+    public PagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
+        mFragment = fragments;
     }
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0:
-                return new QrcodeFragment();
-            case 1:
-                return new MyTicketsFragment();
-            case 2:
-                return new HistoryFragment();
-        }
-        return null;
+    return mFragment.get(position);
+        //        switch (position){
+//            case 0:
+//                return new QrcodeFragment();
+//            case 1:
+//                return new MyTicketsFragment();
+//            case 2:
+//                return new HistoryFragment();
+//        }
+//        return null;
     }
 
     @Override

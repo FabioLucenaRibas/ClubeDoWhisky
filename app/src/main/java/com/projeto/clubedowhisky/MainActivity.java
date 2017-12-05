@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -25,10 +26,15 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.projeto.clubedowhisky.classes.Clients;
 import com.projeto.clubedowhisky.classes.Drinks;
 import com.projeto.clubedowhisky.pager.PagerAdapter;
+import com.projeto.clubedowhisky.tabs.HistoryFragment;
+import com.projeto.clubedowhisky.tabs.MyTicketsFragment;
+import com.projeto.clubedowhisky.tabs.QrcodeFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -212,7 +218,20 @@ public class MainActivity extends AppCompatActivity
     private void buildViewPager(){
         //Initializing viewPager
         viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+
+        Bundle b = new Bundle();
+        b.putSerializable("client", getIntent().getSerializableExtra("client"));
+
+        QrcodeFragment qr = new QrcodeFragment();
+
+        MyTicketsFragment myTicketsFragment = new MyTicketsFragment();
+        myTicketsFragment.setArguments(b);
+
+        HistoryFragment historyFragment = new HistoryFragment();
+
+        PagerAdapter pg = new PagerAdapter(getSupportFragmentManager(), Arrays.asList(qr, myTicketsFragment, historyFragment));
+
+        viewPager.setAdapter(pg);
         viewPager.setOffscreenPageLimit(3);
         viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
 
