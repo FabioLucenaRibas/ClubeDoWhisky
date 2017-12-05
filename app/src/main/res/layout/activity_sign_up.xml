@@ -78,7 +78,7 @@
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="@string/placeholder_password"
-                    android:inputType="text|textCapCharacters|textCapWords|textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|textNoSuggestions|textUri|textEmailAddress|textEmailSubject|textShortMessage|textLongMessage|textPersonName|textPostalAddress|textPassword|textVisiblePassword|textWebEditText|textFilter|textPhonetic|textWebEmailAddress|textWebPassword|phone"
+                    android:inputType="textPassword"
                     android:maxLength="20" />
             </android.support.design.widget.TextInputLayout>
 
