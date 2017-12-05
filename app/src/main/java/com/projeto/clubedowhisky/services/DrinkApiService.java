@@ -1,7 +1,6 @@
 package com.projeto.clubedowhisky.services;
 
 import com.projeto.clubedowhisky.classes.Drinks;
-import com.projeto.clubedowhisky.loadResults.DrinksLoadResult;
 
 import java.util.ArrayList;
 

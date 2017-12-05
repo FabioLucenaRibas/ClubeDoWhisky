@@ -2,7 +2,6 @@ package com.projeto.clubedowhisky.httpDrink;
 
 import com.projeto.clubedowhisky.classes.Clients;
 import com.projeto.clubedowhisky.classes.Drinks;
-import com.projeto.clubedowhisky.loadResults.DrinksLoadResult;
 import com.projeto.clubedowhisky.services.ClientApiService;
 import com.projeto.clubedowhisky.services.DrinkApiService;
 

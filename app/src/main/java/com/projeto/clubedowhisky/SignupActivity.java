@@ -2,6 +2,8 @@ package com.projeto.clubedowhisky;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -9,7 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class SignupActivity extends AppCompatActivity {
+import com.projeto.clubedowhisky.classes.Clients;
+import com.projeto.clubedowhisky.classes.Users;
+import com.projeto.clubedowhisky.httpClient.SaveClientTask;
+import com.projeto.clubedowhisky.tabs.MyTicketsFragment;
+
+import java.io.Serializable;
+
+public class SignupActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Clients>{
 
     private String email;
     private String fullname;
@@ -21,11 +30,16 @@ public class SignupActivity extends AppCompatActivity {
     EditText signupUsername;
     Toolbar toolbar;
     private String username;
+    LoaderManager mLoaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        mLoaderManager = SignupActivity.this.getSupportLoaderManager();
+//        mLoaderManager.initLoader(0,null, SignupActivity.this);
+
         this.toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (this.toolbar != null) {
             setSupportActionBar(this.toolbar);
@@ -46,10 +60,18 @@ public class SignupActivity extends AppCompatActivity {
 
                 // TODO CRIAR CHAMADA PARA REGISTRAR CLIENTE
 
-                if (!SignupActivity.this.verifyRegForm().booleanValue()) {
-                    return;
-                }
+//                if (!SignupActivity.this.verifyRegForm().booleanValue()) {
+//                    return;
+//                } else{
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username", username);
+                    bundle.putString("fullname", fullname);
+                    bundle.putString("password", password);
+                    bundle.putString("email", email);
 
+                    mLoaderManager.initLoader(0,bundle, SignupActivity.this);
+
+//                }
 
             }
         });
@@ -85,11 +107,8 @@ public class SignupActivity extends AppCompatActivity {
         } else if (this.email.length() == 0) {
             this.signupEmail.setError(getString(R.string.error_field_empty));
             return Boolean.FALSE;
-        } else if (helper.isValidEmail(this.email)) {
-            this.signupEmail.setError(getString(R.string.error_email));
-            return Boolean.FALSE;
         } else {
-            this.signupEmail.setError(getString(R.string.error_wrong_format));
+//            this.signupEmail.setError(getString(R.string.error_wrong_format));
             return Boolean.FALSE;
         }
     }
@@ -108,4 +127,26 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public Loader<Clients> onCreateLoader(int id, Bundle args) {
+        if (args !=null){
+            return new SaveClientTask(getApplicationContext(), args.getString("username"),
+                    args.getString("password"), args.getString("email"), args.getString("fullname"));
+        }
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Clients> loader, Clients data) {
+        if (data != null){
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("client", data);
+            startActivity(i);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Clients> loader) {
+
+    }
 }

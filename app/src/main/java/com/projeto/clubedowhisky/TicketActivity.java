@@ -39,7 +39,6 @@ public class TicketActivity extends AppCompatActivity implements LoaderManager.L
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        // TODO CRIAR CHAMADA PARA BUSCAR UMA LISTA DE BEBIDAS
         Bundle bundle = new Bundle();
         bundle.putInt("limit", 20);
         mLoaderManager = TicketActivity.this.getSupportLoaderManager();
