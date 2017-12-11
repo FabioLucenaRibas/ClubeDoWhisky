@@ -44,6 +44,8 @@
     <string name="label_unitary_value">Unitary value:</string>
     <string name="label_starting_at">Starting at</string>
     <string name="label_total">Total:</string>
+    <string name="label_my_tickets">My Tickets</string>
+    <string name="label_historic">Historic</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

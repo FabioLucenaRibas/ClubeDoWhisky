@@ -180,6 +180,12 @@ public class MainActivity extends AppCompatActivity
             } else {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, MapsActivity.class));
             }
+
+            int checkPermission1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
+            if (checkPermission1 == PackageManager.PERMISSION_GRANTED) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this, MapsActivity.class));
+            }
+
             return true;
         }
 
@@ -242,7 +248,7 @@ public class MainActivity extends AppCompatActivity
 
         HistoryFragment historyFragment = new HistoryFragment();
 
-        PagerAdapter pg = new PagerAdapter(getSupportFragmentManager(), Arrays.asList(qr, myTicketsFragment, historyFragment));
+        PagerAdapter pg = new PagerAdapter(getSupportFragmentManager(), Arrays.asList(qr, myTicketsFragment, historyFragment), this);
 
         viewPager.setAdapter(pg);
         viewPager.setOffscreenPageLimit(3);

@@ -44,6 +44,8 @@
     <string name="label_unitary_value">Valor Unitario (Dose):</string>
     <string name="label_starting_at">A partir de</string>
     <string name="label_total">Total:</string>
+    <string name="label_my_tickets">Meus Tickets</string>
+    <string name="label_historic">Histórico</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
