@@ -1,9 +1,7 @@
 package com.projeto.clubedowhisky;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -37,7 +35,7 @@ public class AddCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_cart);
 
 
-        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.toolbar = findViewById(R.id.toolbar);
         if (this.toolbar != null) {
             setSupportActionBar(this.toolbar);
         }
@@ -49,16 +47,16 @@ public class AddCartActivity extends AppCompatActivity {
         drink = i.getParcelableExtra("drink");
         drink.setQuantities(1);
 
-        photo = (ImageView) findViewById(R.id.drink_photo);
-        name = (TextView) findViewById(R.id.drink_name);
-        description = (TextView) findViewById(R.id.drink_descricao);
-        price = (TextView) findViewById(R.id.drink_preco);
-        addDose = (ImageButton) findViewById(R.id.add_dose);
-        removeDose = (ImageButton) findViewById(R.id.remove_dose);
-        quantities = (TextView) findViewById(R.id.drink_quantities);
-        amount = (TextView) findViewById(R.id.drink_preco_total);
+        photo = findViewById(R.id.drink_photo);
+        name = findViewById(R.id.drink_name);
+        description = findViewById(R.id.drink_description);
+        price = findViewById(R.id.drink_price);
+        addDose = findViewById(R.id.add_dose);
+        removeDose = findViewById(R.id.remove_dose);
+        quantities = findViewById(R.id.drink_quantities);
+        amount = findViewById(R.id.drink_price_total);
 
-        addCart = (Button) findViewById(R.id.button);
+        addCart = findViewById(R.id.button);
         addCart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 actionAddToCart();
@@ -66,8 +64,8 @@ public class AddCartActivity extends AppCompatActivity {
         });
 
         name.setText(drink.getName());
-        description.setText(drink.getDescricao());
-        price.setText(Helper.formatarPreco(drink.getPreco()));
+        description.setText(drink.getDescription());
+        price.setText(Helper.formatarPreco(drink.getPrice()));
 
 
         if (savedInstanceState != null) {
@@ -79,8 +77,8 @@ public class AddCartActivity extends AppCompatActivity {
 
         } else {
             quantities.setText(drink.getQuantities().toString());
-            amount.setText(Helper.formatarPreco(drink.getPreco()));
-            amountValue = drink.getPreco();
+            amount.setText(Helper.formatarPreco(drink.getPrice()));
+            amountValue = drink.getPrice();
         }
 
         addDose.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +88,7 @@ public class AddCartActivity extends AppCompatActivity {
                 value += 1;
                 drink.setQuantities(value);
                 quantities.setText(drink.getQuantities().toString());
-                amountValue = drink.getPreco();
+                amountValue = drink.getPrice();
                 amountValue *= value;
 
                 amount.setText(Helper.formatarPreco(amountValue));
@@ -106,7 +104,7 @@ public class AddCartActivity extends AppCompatActivity {
                     value -= 1;
                     drink.setQuantities(value);
                     quantities.setText(drink.getQuantities().toString());
-                    amountValue = drink.getPreco();
+                    amountValue = drink.getPrice();
                     amountValue *= value;
 
                     amount.setText(Helper.formatarPreco(amountValue));
@@ -150,6 +148,7 @@ public class AddCartActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
+        startActivity(new Intent(AddCartActivity.this, TicketActivity.class));
         finish();
     }
 
@@ -164,7 +163,7 @@ public class AddCartActivity extends AppCompatActivity {
     }
 
     public void actionAddToCart() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+       /* AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(R.string.action_keep_buying);
         alertDialogBuilder.setPositiveButton(R.string.action_yes,
                 new DialogInterface.OnClickListener() {
@@ -183,12 +182,16 @@ public class AddCartActivity extends AppCompatActivity {
 
 
                 startActivity(new Intent(AddCartActivity.this, CartActivity.class));
+                finish();
                 // TODO CHAMAR METODO PARA ADICIONAR NO CARRINHO (SQLLITE)  E IR PARA TELA DE CARRINHO
 
             }
         });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        alertDialog.show();*/
+        startActivity(new Intent(AddCartActivity.this, TicketActivity.class));
+        finish();
+        // TODO CHAMAR METODO PARA ADICIONAR NO CARRINHO (SQLLITE) E VOLTAR PARA LISTA DE TICKETS
     }
 }

@@ -3,18 +3,14 @@ package com.projeto.clubedowhisky.classes;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Drinks implements Parcelable {
 
-    private Integer id = 0;
-    private String name = "";
-    private Integer quantities = 0;
-    @SerializedName("description")
-    private String descricao = "";
-    @SerializedName("price")
-    private Double preco = 0.0;
-    private Double amountValue = 0.0;
+    private Integer id;
+    private String name;
+    private Integer quantities;
+    private String description;
+    private Double price;
+    private Double amountValue;
 
     public Integer getId() {
         return id;
@@ -40,20 +36,20 @@ public class Drinks implements Parcelable {
         this.quantities = quantities;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Double getPreco() {
-        return preco;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Double getAmountValue() {
@@ -74,20 +70,21 @@ public class Drinks implements Parcelable {
         dest.writeValue(this.id);
         dest.writeString(this.name);
         dest.writeValue(this.quantities);
-        dest.writeString(this.descricao);
-        dest.writeValue(this.preco);
+        dest.writeString(this.description);
+        dest.writeValue(this.price);
         dest.writeValue(this.amountValue);
     }
 
     public Drinks() {
+        super();
     }
 
     protected Drinks(Parcel in) {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.name = in.readString();
         this.quantities = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.descricao = in.readString();
-        this.preco = (Double) in.readValue(Double.class.getClassLoader());
+        this.description = in.readString();
+        this.price = (Double) in.readValue(Double.class.getClassLoader());
         this.amountValue = (Double) in.readValue(Double.class.getClassLoader());
     }
 

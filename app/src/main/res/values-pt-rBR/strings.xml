@@ -16,9 +16,9 @@
     <string name="action_keep_buying">Deseja continuar comprando?</string>
     <string name="action_finalize">Finalizar</string>
 
-    <string name="placeholder_login">Login</string>
-    <string name="placeholder_fullname">Nome completo</string>
+    <string name="placeholder_name">Nome</string>
     <string name="placeholder_password">Senha</string>
+    <string name="placeholder_confirm_password">Confirmar senha</string>
     <string name="placeholder_email">E-mail</string>
 
     <string name="title_activity_login">Entrar</string>
@@ -37,15 +37,18 @@
     <string name="error_login_taken">O nome de usuário já existe</string>
     <string name="error_password">Senha Invalida.</string>
     <string name="error_signin">Usuário ou senha incorretos</string>
-    <string name="error_small_password">Mínimo de 6 caracteres</string>
+    <string name="error_small_password">Mínimo de 8 caracteres</string>
     <string name="error_small_username">Mínimo de 5 caracteres</string>
     <string name="error_wrong_format">Formato incorreto</string>
+    <string name="error_password_not_match">As senhas não coincidem</string>
+    <string name="error_service_temporarily">Serviço Temporariamente Indisponível.\nPor favor, tente novamente mais tarde</string>
 
     <string name="label_unitary_value">Valor Unitario (Dose):</string>
     <string name="label_starting_at">A partir de</string>
     <string name="label_total">Total:</string>
     <string name="label_my_tickets">Meus Tickets</string>
     <string name="label_historic">Histórico</string>
+    <string name="total_order">Total do Pedido:</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -57,4 +60,9 @@
     <string name="dialog_title_remover_item">Remover item</string>
     <string name="dialog_remover_item">Deseja remover o item do carrinho?</string>
 
+    <string name="dialog_add_cart">Adicionado ao carrinho</string>
+    <string name="exit">Sair</string>
+    <string name="does_not_exist">não existe</string>
+    <string name="redefine_password">As instruções para redefinição de senha foi enviada para</string>
+    <string name="settings">Configurações</string>
 </resources>

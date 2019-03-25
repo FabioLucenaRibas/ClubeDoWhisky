@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "639797839891",
+    "firebase_url": "https://clube-do-whisky.firebaseio.com",
+    "project_id": "clube-do-whisky",
+    "storage_bucket": "clube-do-whisky.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639797839891:android:f453f73dbd425990",
+        "android_client_info": {
+          "package_name": "com.projeto.clubedowhisky"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639797839891-1n5echdk2cd6kpfk5ea370v5lqvt4dss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.projeto.clubedowhisky",
+            "certificate_hash": "d489bd7e323de227a15618a773b3157c01574740"
+          }
+        },
+        {
+          "client_id": "639797839891-ubacu3akmugmv6gtse39jji6r8bb5dej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJQi6gK0o-RiXS2LzVplwAe4BA43VGZ8Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639797839891-ubacu3akmugmv6gtse39jji6r8bb5dej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

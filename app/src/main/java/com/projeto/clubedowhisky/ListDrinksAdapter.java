@@ -33,13 +33,13 @@ public class ListDrinksAdapter extends BaseAdapter {
                 .findViewById(R.id.drink_name);
         drink_name.setText(drink.getName());
 
-        TextView drink_descricao = view
-                .findViewById(R.id.drink_descricao);
-        drink_descricao.setText(drink.getDescricao());
+        TextView drink_description = view
+                .findViewById(R.id.drink_description);
+        drink_description.setText(drink.getDescription());
 
-        TextView drink_preco = view
-                .findViewById(R.id.drink_preco);
-        drink_preco.setText(Helper.formatarPreco(drink.getPreco()));
+        TextView drink_price = view
+                .findViewById(R.id.drink_price);
+        drink_price.setText(Helper.formatarPreco(drink.getPrice()));
 
         switch (drink.getId()) {
             case 1:

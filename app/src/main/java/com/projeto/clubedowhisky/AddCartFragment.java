@@ -1,10 +1,7 @@
 package com.projeto.clubedowhisky;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.projeto.clubedowhisky.classes.Drinks;
 
@@ -43,12 +41,12 @@ public class AddCartFragment extends Fragment {
 
         photo = view.findViewById(R.id.drink_photo);
         name = view.findViewById(R.id.drink_name);
-        description = view.findViewById(R.id.drink_descricao);
-        price = view.findViewById(R.id.drink_preco);
+        description = view.findViewById(R.id.drink_description);
+        price = view.findViewById(R.id.drink_price);
         addDose = view.findViewById(R.id.add_dose);
         removeDose = view.findViewById(R.id.remove_dose);
         quantities = view.findViewById(R.id.drink_quantities);
-        amount = view.findViewById(R.id.drink_preco_total);
+        amount = view.findViewById(R.id.drink_price_total);
 
         if (savedInstanceState != null) {
             Integer value = savedInstanceState.getInt("quantities");
@@ -59,8 +57,8 @@ public class AddCartFragment extends Fragment {
 
         } else {
             quantities.setText(drink.getQuantities().toString());
-            amount.setText(Helper.formatarPreco(drink.getPreco()));
-            amountValue = drink.getPreco();
+            amount.setText(Helper.formatarPreco(drink.getPrice()));
+            amountValue = drink.getPrice();
         }
 
         addCart = view.findViewById(R.id.button);
@@ -71,8 +69,8 @@ public class AddCartFragment extends Fragment {
         });
 
         name.setText(drink.getName());
-        description.setText(drink.getDescricao());
-        price.setText(Helper.formatarPreco(drink.getPreco()));
+        description.setText(drink.getDescription());
+        price.setText(Helper.formatarPreco(drink.getPrice()));
 
 
         if (savedInstanceState != null) {
@@ -84,18 +82,18 @@ public class AddCartFragment extends Fragment {
 
         } else {
             quantities.setText(drink.getQuantities().toString());
-            amount.setText(Helper.formatarPreco(drink.getPreco()));
-            amountValue = drink.getPreco();
+            amount.setText(Helper.formatarPreco(drink.getPrice()));
+            amountValue = drink.getPrice();
         }
 
         addDose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int value = drink.getQuantities();
-                value += 1;
+                value++;
                 drink.setQuantities(value);
                 quantities.setText(drink.getQuantities().toString());
-                amountValue = drink.getPreco();
+                amountValue = drink.getPrice();
                 amountValue *= value;
 
                 amount.setText(Helper.formatarPreco(amountValue));
@@ -108,10 +106,10 @@ public class AddCartFragment extends Fragment {
             public void onClick(View v) {
                 int value = drink.getQuantities();
                 if (value > 1) {
-                    value -= 1;
+                    value--;
                     drink.setQuantities(value);
                     quantities.setText(drink.getQuantities().toString());
-                    amountValue = drink.getPreco();
+                    amountValue = drink.getPrice();
                     amountValue *= value;
 
                     amount.setText(Helper.formatarPreco(amountValue));
@@ -150,7 +148,7 @@ public class AddCartFragment extends Fragment {
     }
 
     public void actionAddToCart() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+       /* AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder.setMessage(R.string.action_keep_buying);
         alertDialogBuilder.setPositiveButton(R.string.action_yes,
                 new DialogInterface.OnClickListener() {
@@ -173,6 +171,13 @@ public class AddCartFragment extends Fragment {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+        */
+
+        // TODO CHAMAR METODO PARA ADICIONAR NO CARRINHO (SQLLITE)
+
+
+        Toast.makeText(getActivity().getApplicationContext(),
+                (R.string.dialog_add_cart), Toast.LENGTH_SHORT).show();
     }
 
     @Override

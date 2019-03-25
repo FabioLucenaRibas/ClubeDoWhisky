@@ -8,10 +8,6 @@ import android.view.ViewGroup;
 
 import com.projeto.clubedowhisky.R;
 
-/**
- * Created by pedrolima on 30/11/2017.
- */
-
 public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

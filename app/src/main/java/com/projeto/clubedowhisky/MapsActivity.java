@@ -3,7 +3,8 @@ package com.projeto.clubedowhisky;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,30 +20,28 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private GoogleMap mMap;
     private GoogleApiClient googleApiClient;
     public Location location;
-    protected double latitude;
-    protected double longitude;
-
-    private static final int REQUEST_LOCATION = 1;
-    private Toolbar toolbar;
+    int checkPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (this.toolbar != null) {
-            setSupportActionBar(this.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        checkPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this) //Be aware of state of the connection
@@ -50,6 +50,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .build();
         //Tentando conexão com o Google API. Se a tentativa for bem sucessidade, o método onConnected() será chamado, senão, o método onConnectionFailed() será chamado.
         googleApiClient.connect();
+
+        FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location pLocation) {
+                        // Got last known location. In some rare situations, this can be null.
+                        if (pLocation != null) {
+                            location = new Location(pLocation);
+                        }
+                    }
+                });
+
+
     }
 
 
@@ -64,26 +78,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        // Add a marker and move the camera
-
         // TODO CRIAR CHAMADA PARA BUSCAR LISTA DE BARES E RESTAURANTES E ATRIBUIR AO addMarker PARA EXIBIR NO MAPA
 
+        // Add a marker and move the camera
         LatLng currentLocation1 = new LatLng(-8.1518139, -34.9193298);
-        mMap.addMarker(new MarkerOptions().position(currentLocation1).title("Tempero da Galega"));
+        googleMap.addMarker(new MarkerOptions().position(currentLocation1).title("Tempero da Galega"));
         //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17.0f));
 
-        LatLng currentLocation = new LatLng(latitude, longitude);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17.0f));
+        LatLng currentLocation = new LatLng(getLatitude(), getLongitude());
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17.0f));
 
-        int checkPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
-        if (checkPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_LOCATION);
-        } else {
-            mMap.setMyLocationEnabled(true);
+        if (checkPermission == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
         }
 
     }
@@ -107,32 +113,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     /**
      * Depois que o método connect() for chamado, esse método será chamado de forma assíncrona caso a conexão seja bem sucedida.
-     *
-     * @param bundle
-     */
+     **/
     @Override
-    public void onConnected(Bundle bundle) {
-        //Google API connection has been done successfully
-        int checkPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
-        if (checkPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_LOCATION);
-        } else {
-            Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-            if (location != null) {
-                this.latitude = location.getLatitude();
-                this.longitude = location.getLongitude();
-            }
-
+    public void onConnected(@Nullable Bundle bundle) {
+        if (checkPermission == PackageManager.PERMISSION_GRANTED) {
             // Obtain the SupportMapFragment and get notified when the map is ready to be used.
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
         }
-
     }
+
 
     /**
      * Esse método é chamado quando o client está temporariamente desconectado. Isso pode acontecer quando houve uma falha ou problema com o serviço que faça com que o client seja desligado.
@@ -147,11 +138,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     /**
      * Método chamado quando um erro de conexão acontece e não é possível acessar os serviços da Google Service.
-     *
-     * @param connectionResult
      */
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         //A conexão com o Google API falhou!
         pararConexaoComGoogleApi();
     }
@@ -159,11 +148,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case 16908332:
-                finish();
+                onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    public double getLatitude() {
+        if (location != null) {
+            return location.getLatitude();
+        }
+        return 0D;
+    }
+
+    public double getLongitude() {
+        if (location != null) {
+            return location.getLongitude();
+        }
+        return 0D;
+    }
 }

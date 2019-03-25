@@ -34,7 +34,7 @@ public class ListCartAdapter extends BaseAdapter {
         drink_quantities.setText(drink.getQuantities().toString());
 
         TextView drink_preco_total = view
-                .findViewById(R.id.drink_preco_total);
+                .findViewById(R.id.drink_price_total);
         drink_preco_total.setText(Helper.formatarPreco(drink.getAmountValue()));
 
         return view;

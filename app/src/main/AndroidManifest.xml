@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.projeto.clubedowhisky">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -36,7 +35,7 @@
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".SignUp2Activity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_sign_up"
             android:screenOrientation="portrait" />
@@ -53,7 +52,6 @@
             android:label="@string/title_activity_add_to_cart" />
         <activity
             android:name=".TicketActivity"
-            android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_ticket" />
         <activity
             android:name=".CartActivity"
@@ -74,7 +72,7 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
     </application>
 
 </manifest>

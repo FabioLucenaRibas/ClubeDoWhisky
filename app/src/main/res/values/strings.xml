@@ -16,9 +16,9 @@
     <string name="action_keep_buying">Do you want to continue shopping?</string>
     <string name="action_finalize">Finalize</string>
 
-    <string name="placeholder_login">Username</string>
-    <string name="placeholder_fullname">Fullname</string>
+    <string name="placeholder_name">Name</string>
     <string name="placeholder_password">Password</string>
+    <string name="placeholder_confirm_password">Confirm Password</string>
     <string name="placeholder_email">Email</string>
 
     <string name="title_activity_login">Log In</string>
@@ -30,22 +30,25 @@
     <string name="title_activity_cart">My cart</string>
 
     <string name="error_data_loading">When loading data error has occurred. Check your network connection.</string>
-    <string name="error_email">E-mail invalido.</string>
+    <string name="error_email">E-mail invalid.</string>
     <string name="error_email_taken">User with this mail is already</string>
     <string name="error_field_empty">Required fields are empty</string>
     <string name="error_internet_connection">No internet connection</string>
     <string name="error_login_taken">Username is already taken</string>
     <string name="error_password">Invalid password.</string>
     <string name="error_signin">Incorrect username or password</string>
-    <string name="error_small_password">Minimum 6 characters</string>
+    <string name="error_small_password">Minimum 8 characters</string>
     <string name="error_small_username">Minimum 5 characters</string>
     <string name="error_wrong_format">Wrong format</string>
+    <string name="error_password_not_match">the passwords do not match</string>
+    <string name="error_service_temporarily">Service Temporarily Unavailable.\nPlease try again later</string>
 
     <string name="label_unitary_value">Unitary value:</string>
     <string name="label_starting_at">Starting at</string>
     <string name="label_total">Total:</string>
     <string name="label_my_tickets">My Tickets</string>
     <string name="label_historic">Historic</string>
+    <string name="total_order">Total order:</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -57,5 +60,9 @@
     <string name="dialog_title_remover_item">Remover item</string>
     <string name="dialog_remover_item">Do you want to remove the item from the cart?</string>
 
-
+    <string name="dialog_add_cart">Added to cart</string>
+    <string name="exit">Exit</string>
+    <string name="does_not_exist">does not exist</string>
+    <string name="redefine_password">The instructions for resetting the password have been sent to</string>
+    <string name="settings">Settings</string>
 </resources>

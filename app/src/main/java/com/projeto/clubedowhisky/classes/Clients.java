@@ -1,12 +1,6 @@
 package com.projeto.clubedowhisky.classes;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-
-/**
- * Created by Renato on 20/11/2017.
- */
 
 public class Clients implements Serializable {
 
@@ -17,7 +11,6 @@ public class Clients implements Serializable {
     private String cidade;
     private String complemento;
     private String cpf;
-    @SerializedName("dt_nascimento")
     private String dataNascimento;
     private String endereco;
     private String numero;

@@ -31,7 +31,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/drink_descricao"
+                android:id="@+id/drink_description"
                 android:layout_width="260dp"
                 android:layout_height="36dp"
                 android:layout_below="@id/drink_name"
@@ -42,16 +42,16 @@
                 android:id="@+id/drink_label_preco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/drink_descricao"
+                android:layout_below="@id/drink_description"
                 android:layout_margin="5dp"
                 android:text="@string/label_starting_at"
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/drink_preco"
+                android:id="@+id/drink_price"
                 android:layout_width="193dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/drink_descricao"
+                android:layout_below="@id/drink_description"
                 android:layout_margin="5dp"
                 android:layout_toEndOf="@id/drink_label_preco"
                 android:textColor="@android:color/holo_green_dark"

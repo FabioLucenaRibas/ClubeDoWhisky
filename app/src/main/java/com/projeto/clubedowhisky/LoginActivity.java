@@ -1,105 +1,123 @@
 package com.projeto.clubedowhisky;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.projeto.clubedowhisky.classes.Clients;
-import com.projeto.clubedowhisky.classes.Users;
-import com.projeto.clubedowhisky.httpClient.LoginTask;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Clients> {
+public class LoginActivity extends AppCompatActivity {
 
     TextView mActionForgot;
     String password;
-    Button signinBtn;
-    EditText signinPassword;
-    EditText signinUsername;
+    Button signInBtn;
+    EditText signInPassword;
+    EditText signInEmail;
     Toolbar toolbar;
-    String username;
-    LoaderManager mLoaderManager;
+    String email;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mLoaderManager = LoginActivity.this.getSupportLoaderManager();
-        mLoaderManager.initLoader(0, null, LoginActivity.this);
-
-        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.toolbar = findViewById(R.id.toolbar);
         if (this.toolbar != null) {
             setSupportActionBar(this.toolbar);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        this.signinUsername = (EditText) findViewById(R.id.signinUsername);
-        this.signinPassword = (EditText) findViewById(R.id.signinPassword);
-        this.signinBtn = (Button) findViewById(R.id.signinBtn);
-        this.signinBtn.setOnClickListener(new View.OnClickListener() {
+
+        mAuth = FirebaseAuth.getInstance();
+
+        this.signInEmail = findViewById(R.id.signInEmail);
+        this.signInPassword = findViewById(R.id.signinPassword);
+        this.signInBtn = findViewById(R.id.signinBtn);
+        this.signInBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                LoginActivity.this.username = LoginActivity.this.signinUsername.getText().toString();
-                LoginActivity.this.password = LoginActivity.this.signinPassword.getText().toString();
-
-                if (!username.equals("") && !password.equals("")) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("username", username);
-                    bundle.putString("password", password);
-
-                    mLoaderManager.initLoader(1, bundle, LoginActivity.this);
+                email = signInEmail.getText().toString();
+                password = signInPassword.getText().toString();
+                if (verifyRegForm()) {
+                    login();
                 }
-                             //  if (username.equals("admin") && password.equals("12345")) {
-                             //      LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                             //      finish();
-                             //  }
             }
         });
-        this.mActionForgot = (TextView) findViewById(R.id.actionForgot);
+        this.mActionForgot = findViewById(R.id.actionForgot);
         this.mActionForgot.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                LoginActivity.this.startActivity(new Intent(LoginActivity.this.getApplicationContext(), RecoveryActivity.class));
+                startActivityForResult(new Intent(LoginActivity.this, RecoveryActivity.class), 1);
             }
         });
     }
 
-    public Boolean checkUsername() {
-        this.username = this.signinUsername.getText().toString();
-        this.signinUsername.setError(null);
-        Helper helper = new Helper();
-        if (this.username.length() != 0) {
-            return Boolean.TRUE;
-        }
-        this.signinUsername.setError(getString(R.string.error_field_empty));
-        return Boolean.FALSE;
+    public void login() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (!task.isSuccessful()) {
+                    Log.w("AUTH", "Falha ao efetuar o Login: ", task.getException());
+                } else {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }
+            }
+        });
     }
 
-    public Boolean checkPassword() {
-        this.password = this.signinPassword.getText().toString();
-        this.signinPassword.setError(null);
-        if (this.username.length() != 0) {
-            return Boolean.TRUE;
+    public Boolean verifyRegForm() {
+        this.signInEmail.setError(null);
+        this.signInPassword.setError(null);
+        Helper helper = new Helper();
+
+        Boolean retorno = Boolean.TRUE;
+
+        if (TextUtils.isEmpty(email)) {
+            this.signInEmail.setError(getString(R.string.error_field_empty));
+            retorno = Boolean.FALSE;
+        } else if (!helper.isValidEmail(email)) {
+            this.signInEmail.setError(getString(R.string.error_wrong_format));
+            retorno = Boolean.FALSE;
         }
-        this.signinPassword.setError(getString(R.string.error_field_empty));
-        return Boolean.FALSE;
+
+        if (TextUtils.isEmpty(password)) {
+            this.signInPassword.setError(getString(R.string.error_field_empty));
+            retorno = Boolean.FALSE;
+        } else if (this.password.length() < 8) {
+            this.signInPassword.setError(getString(R.string.error_small_password));
+            retorno = Boolean.FALSE;
+        } else if (!helper.isValidPassword(this.password)) {
+            this.signInPassword.setError(getString(R.string.error_wrong_format));
+            retorno = Boolean.FALSE;
+        }
+        return retorno;
     }
 
     public void onBackPressed() {
-        LoginActivity.this.startActivity(new Intent(LoginActivity.this, AppActivity.class));
+        startActivity(new Intent(LoginActivity.this, AppActivity.class));
         finish();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case 16908332:
-                finish();
+                onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -107,30 +125,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     }
 
     @Override
-    public Loader<Clients> onCreateLoader(int id, Bundle args) {
-        if (args != null) {
-            String username = args.getString("username");
-            String password = args.getString("password");
-        } else {
-            String username = "";
-            String password = "";
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                String pEmail = data.getStringExtra("email");
+                Snackbar.make(LoginActivity.this.getCurrentFocus(), getString(R.string.redefine_password) + " " + pEmail, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
         }
-        return new LoginTask(getApplicationContext(), username, password);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Clients> loader, Clients data) {
-        if (data != null) {
-
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-            Users user = data.getUser();
-            i.putExtra("user" , user);
-            startActivity(i);
-//            finish();
-        }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Clients> loader) {
     }
 }

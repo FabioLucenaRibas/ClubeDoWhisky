@@ -19,7 +19,6 @@
 
 
     <ScrollView
-        android:id="@id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
@@ -62,12 +61,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:text="Total do Pedido:"
+            android:text="@string/total_order"
             android:textColor="@android:color/black" />
 
 
         <TextView
-            android:id="@+id/drink_preco_total"
+            android:id="@+id/drink_price_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -89,8 +88,7 @@
         android:drawableRight="@drawable/ic_checkout_next"
         android:text="@string/action_finalize"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:onClick="" />
+        android:textStyle="bold" />
 
 </RelativeLayout>
 

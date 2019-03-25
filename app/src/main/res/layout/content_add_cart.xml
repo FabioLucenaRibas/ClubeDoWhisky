@@ -9,7 +9,6 @@
         android:layout_height="match_parent">
 
         <ScrollView
-            android:id="@id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/button"
@@ -46,7 +45,7 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/drink_descricao"
+                        android:id="@+id/drink_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -69,7 +68,7 @@
                             android:textColor="@android:color/black" />
 
                         <TextView
-                            android:id="@+id/drink_preco"
+                            android:id="@+id/drink_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -126,13 +125,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_toStartOf="@+id/drink_preco_total"
+                            android:layout_toStartOf="@+id/drink_price_total"
                             android:text="@string/label_total"
                             android:textColor="@android:color/black"
                             android:textSize="18sp" />
 
                         <TextView
-                            android:id="@+id/drink_preco_total"
+                            android:id="@+id/drink_price_total"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"

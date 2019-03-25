@@ -4,12 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -21,14 +18,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.projeto.clubedowhisky.classes.Clients;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.projeto.clubedowhisky.classes.Drinks;
-import com.projeto.clubedowhisky.classes.Users;
 import com.projeto.clubedowhisky.pager.PagerAdapter;
 import com.projeto.clubedowhisky.tabs.HistoryFragment;
 import com.projeto.clubedowhisky.tabs.MyTicketsFragment;
@@ -47,8 +42,8 @@ public class MainActivity extends AppCompatActivity
     GridAdapter adapter;
     ViewPager viewPager;
     TabLayout tabLayout;
-
-    private FragmentActivity myContext;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
 
     static final int REQUEST_CODE = 1;
     private static final int REQUEST_LOCATION = 1;
@@ -58,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.toolbar = findViewById(R.id.toolbar);
         if (this.toolbar != null) {
             setSupportActionBar(this.toolbar);
         }
@@ -72,29 +67,26 @@ public class MainActivity extends AppCompatActivity
 //            }
 //        });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
 
-//        TextView nome =  headerView.findViewById(R.id.nome);
+        TextView nome = headerView.findViewById(R.id.nome);
         TextView email = headerView.findViewById(R.id.email);
 
-        Clients c = (Clients) getIntent().getSerializableExtra("client");
-        if (c != null){
-            email.setText(c.getUser().getEmail());
-        }else {
-            Users u = (Users) getIntent().getSerializableExtra("user");
-            email.setText(u.getEmail());
-        }
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        nome.setText(user.getDisplayName());
+        email.setText(user.getEmail());
 
         // TODO CRIAR CHAMADA PARA BUSCAR LISTA DE TICKETS QUE O CLIENTE LOGADO POSSUI
-//        obterListaTicketsCliente();
+        obterListaTicketsCliente();
 
 //        gridView = (GridView) findViewById(R.id.gridView1);
 //        adapter = new GridAdapter(this, drinks);
@@ -128,12 +120,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            openDialogExit();
-            //super.onBackPressed();
+            finishAndRemoveTask();
         }
     }
 
@@ -144,7 +135,9 @@ public class MainActivity extends AppCompatActivity
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        finishAndRemoveTask();
+                        mAuth.signOut();
+                        startActivity(new Intent(MainActivity.this, AppActivity.class));
+                        finish();
                     }
                 });
 
@@ -178,48 +171,32 @@ public class MainActivity extends AppCompatActivity
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         REQUEST_LOCATION);
             } else {
-                MainActivity.this.startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
             }
-
-            int checkPermission1 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
-            if (checkPermission1 == PackageManager.PERMISSION_GRANTED) {
-                MainActivity.this.startActivity(new Intent(MainActivity.this, MapsActivity.class));
-            }
-
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (id) {
+            case R.id.nav_exit:
+                openDialogExit();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
     }
 
     private void obterListaTicketsCliente() {
-        // Implementar consulta do serviço e gravar no sqlLite
+        // TODO Implementar consulta do serviço e gravar no sqlLite
 
         Drinks item = new Drinks();
         item.setId(1);
@@ -236,7 +213,7 @@ public class MainActivity extends AppCompatActivity
 
     private void buildViewPager(){
         //Initializing viewPager
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager = findViewById(R.id.view_pager);
 
         Bundle b = new Bundle();
         b.putSerializable("client", getIntent().getSerializableExtra("client"));
@@ -255,7 +232,7 @@ public class MainActivity extends AppCompatActivity
         viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
 
         //Initializing the tablayout
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_camera);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

@@ -32,7 +32,7 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
 
-        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.toolbar = findViewById(R.id.toolbar);
         if (this.toolbar != null) {
             setSupportActionBar(this.toolbar);
         }
@@ -42,11 +42,11 @@ public class CartActivity extends AppCompatActivity {
 
         obterListaTicketsCliente();
 
-        listCart = (ListView) findViewById(R.id.listCart);
-        amount = (TextView) findViewById(R.id.drink_preco_total);
+        listCart = findViewById(R.id.listCart);
+        amount = findViewById(R.id.drink_price_total);
 
         for (int i = 0; i < drinks.size(); i++) {
-            drinks.get(i).setAmountValue(drinks.get(i).getPreco() * drinks.get(i).getQuantities());
+            drinks.get(i).setAmountValue(drinks.get(i).getPrice() * drinks.get(i).getQuantities());
         }
 
         updateList();
@@ -70,7 +70,7 @@ public class CartActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case 16908332:
-                finish();
+                onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -79,62 +79,63 @@ public class CartActivity extends AppCompatActivity {
 
 
     private void obterListaTicketsCliente() {
+
         // TODO OBTER LISTA DE BEBIDAS DO CARRINHO (SQLLITE)
 
         Drinks item = new Drinks();
         item.setId(1);
         item.setName("Whisky Old Parr 12 anos");
         item.setQuantities(1);
-        item.setDescricao("Descrição Teste");
-        item.setPreco(9.50);
+        item.setDescription("Descrição Teste");
+        item.setPrice(9.50);
         drinks.add(item);
 
         Drinks item2 = new Drinks();
         item2.setId(2);
         item2.setName("Whisky Jack Daniels Honey");
         item2.setQuantities(1);
-        item2.setDescricao("Descrição Teste");
-        item2.setPreco(7.30);
+        item2.setDescription("Descrição Teste");
+        item2.setPrice(7.30);
         drinks.add(item2);
 
         Drinks item3 = new Drinks();
         item3.setId(3);
         item3.setName("Whisky Chivas Regal 12 anos");
         item3.setQuantities(1);
-        item3.setDescricao("Descrição Teste");
-        item3.setPreco(8.75);
+        item3.setDescription("Descrição Teste");
+        item3.setPrice(8.75);
         drinks.add(item3);
 
         Drinks item4 = new Drinks();
         item4.setId(4);
         item4.setName("Whisky Johnnie Walker Blue");
         item4.setQuantities(1);
-        item4.setDescricao("Descrição Teste");
-        item4.setPreco(76.80);
+        item4.setDescription("Descrição Teste");
+        item4.setPrice(76.80);
         drinks.add(item4);
 
         Drinks item5 = new Drinks();
         item5.setId(5);
         item5.setName("Whisky Johnnie Walker Double");
         item5.setQuantities(1);
-        item5.setDescricao("Descrição Teste");
-        item5.setPreco(11.75);
+        item5.setDescription("Descrição Teste");
+        item5.setPrice(11.75);
         drinks.add(item5);
 
         Drinks item6 = new Drinks();
         item6.setId(6);
         item6.setName("Whisky Johnnie Walker Black");
         item6.setQuantities(1);
-        item6.setDescricao("Descrição Teste");
-        item6.setPreco(9.99);
+        item6.setDescription("Descrição Teste");
+        item6.setPrice(9.99);
         drinks.add(item6);
 
         Drinks item7 = new Drinks();
         item7.setId(7);
         item7.setName("Whisky Johnnie Walker Red");
         item7.setQuantities(1);
-        item7.setDescricao("O Whisky Johnnie Walker Red Label tem uma seleção inigualável de mais de 35 maltes na sua composição que garantem a sua superioridade. Com aroma doce amadeirado, cravo-da-índia e doce de manteiga e sabor rico com mel. Lançado em 1909");
-        item7.setPreco(5.80);
+        item7.setDescription("O Whisky Johnnie Walker Red Label tem uma seleção inigualável de mais de 35 maltes na sua composição que garantem a sua superioridade. Com aroma doce amadeirado, cravo-da-índia e doce de manteiga e sabor rico com mel. Lançado em 1909");
+        item7.setPrice(5.80);
         drinks.add(item7);
     }
 
@@ -146,20 +147,20 @@ public class CartActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.add_dose:
                 int value = drink.getQuantities();
-                value += 1;
+                value++;
                 drink.setQuantities(value);
-                drink.setAmountValue(drink.getPreco() * value);
+                drink.setAmountValue(drink.getPrice() * value);
                 updateList();
                 break;
             case R.id.remove_dose:
                 Integer value1 = drink.getQuantities();
-                value1 -= 1;
+                value1--;
                 if (value1.equals(0)) {
                     drinks.remove(drink);
                     //removeItemFromList();
                 } else {
                     drink.setQuantities(value1);
-                    drink.setAmountValue(drink.getPreco() * value1);
+                    drink.setAmountValue(drink.getPrice() * value1);
                 }
                 updateList();
                 break;
@@ -192,7 +193,7 @@ public class CartActivity extends AppCompatActivity {
         amount.setText(Helper.formatarPreco(value));
     }
 
-    public void removeItemFromList() {
+    private void removeItemFromList() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         final AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialogBuilder.setTitle(R.string.dialog_title_remover_item);

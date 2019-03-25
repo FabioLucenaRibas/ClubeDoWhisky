@@ -22,7 +22,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <ScrollView
-        android:id="@id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -39,12 +38,12 @@
                 android:layout_marginTop="10dp">
 
                 <EditText
-                    android:id="@+id/signinUsername"
+                    android:id="@+id/signInEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:ems="10"
-                    android:hint="@string/placeholder_login"
+                    android:hint="@string/placeholder_email"
                     android:inputType="text|textCapCharacters|textCapWords|textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|textNoSuggestions|textUri|textEmailAddress|textEmailSubject|textShortMessage|textLongMessage|textPersonName|textPostalAddress|textPassword|textVisiblePassword|textWebEditText|textFilter|textPhonetic|textWebEmailAddress|textWebPassword|phone|time"
                     android:maxLength="24" />
             </android.support.design.widget.TextInputLayout>

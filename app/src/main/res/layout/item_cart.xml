@@ -69,7 +69,7 @@
                 android:background="@drawable/ic_find_previous_material" />
 
             <TextView
-                android:id="@+id/drink_preco_total"
+                android:id="@+id/drink_price_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/add_dose"
