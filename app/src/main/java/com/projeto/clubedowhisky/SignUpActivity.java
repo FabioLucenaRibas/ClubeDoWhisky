@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-public class SignUp2Activity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private String name;
     private String email;
@@ -86,7 +86,7 @@ public class SignUp2Activity extends AppCompatActivity {
                             user.sendEmailVerification();
                             login();
                         } else {
-                            Snackbar.make(SignUp2Activity.this.getCurrentFocus(), getString(R.string.error_service_temporarily), Snackbar.LENGTH_LONG)
+                            Snackbar.make(SignUpActivity.this.getCurrentFocus(), getString(R.string.error_service_temporarily), Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         }
                     }
@@ -99,10 +99,10 @@ public class SignUp2Activity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()) {
-                    startActivity(new Intent(SignUp2Activity.this, LoginActivity.class));
+                    startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                     finish();
                 } else {
-                    startActivity(new Intent(SignUp2Activity.this, MainActivity.class));
+                    startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                     finish();
                 }
             }
@@ -150,7 +150,7 @@ public class SignUp2Activity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        startActivity(new Intent(SignUp2Activity.this, AppActivity.class));
+        startActivity(new Intent(SignUpActivity.this, AppActivity.class));
         finish();
     }
 

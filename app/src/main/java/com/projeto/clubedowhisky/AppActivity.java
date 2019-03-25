@@ -48,7 +48,7 @@ public class AppActivity extends AppCompatActivity {
 
         this.signUpBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                startActivity(new Intent(AppActivity.this, SignUp2Activity.class));
+                startActivity(new Intent(AppActivity.this, SignUpActivity.class));
                 finish();
             }
         });

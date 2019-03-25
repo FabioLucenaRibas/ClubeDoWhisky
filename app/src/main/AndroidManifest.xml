@@ -35,7 +35,7 @@
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignUp2Activity"
+            android:name=".SignUpActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_sign_up"
             android:screenOrientation="portrait" />
