@@ -65,4 +65,5 @@
     <string name="does_not_exist">does not exist</string>
     <string name="redefine_password">The instructions for resetting the password have been sent to</string>
     <string name="settings">Settings</string>
+    <string name="invalid_email_password">Invalid email or password</string>
 </resources>
